@@ -16,8 +16,8 @@
     "request": "^2.83.0"
   },
   "scripts": {
-    "update": "node ./scripts/update",
-    "update-music": "node ./scripts/update music",
-    "update-musiclist": "node ./scripts/update musicList"
+    "start": "node ./scripts/update",
+    "start-music": "node ./scripts/update music",
+    "start-musiclist": "node ./scripts/update musicList"
   }
 }
