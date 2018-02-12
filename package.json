@@ -10,7 +10,6 @@
   "author": "Liam Morgan",
   "license": "MIT",
   "dependencies": {
-    "fast-csv": "^2.4.1",
     "file-system": "^2.2.2",
     "node-fetch": "^2.0.0",
     "papaparse": "^4.3.7",
