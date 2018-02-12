@@ -1,5 +1,5 @@
-const fs = require('fs');
-
+const fs = require('fs')
+const dir = __dirname
 console.log('\n')
 
 const update = async function(args) {
@@ -11,28 +11,29 @@ const update = async function(args) {
     config = false
 
   let orchestrionUi
-  await new Promise((resolve) => fs.readFile('../docs/orchestrionUi.json', 'utf8', (e, data) => {
+
+  await new Promise((resolve) => fs.readFile(`${dir}/../docs/orchestrionUi.json`, 'utf8', (e, data) => {
     resolve(data)
   })).then(data => orchestrionUi = JSON.parse(data))
 
   // Patches
   if (!config || config.patches) {
     message('Patches')
-    await require('./patches/list.js').fetch()
+    await require(`${dir}/patches/list.js`).fetch()
   }
 
   // Orchestrion Rolls
   if (!config || config.music) {
     message('Orchestrion Rolls')
-    await require('./orchestrionrolls/list.js').fetch(orchestrionUi)
-    await require('./orchestrionrolls/data.js').fetch()
+    await require(`${dir}/orchestrionrolls/list.js`).fetch(orchestrionUi)
+    await require(`${dir}/orchestrionrolls/data.js`).fetch()
   }
   if (config && config.musicList) {
-    await require('./orchestrionrolls/list.js').fetch(orchestrionUi)
+    await require(`${dir}/orchestrionrolls/list.js`).fetch(orchestrionUi)
   }
 
   if (config && config.updateCSV) {
-    await require('./orchestrionrolls/csv.js').fetch()
+    await require(`${dir}/orchestrionrolls/csv.js`).fetch()
   }
 }
 
