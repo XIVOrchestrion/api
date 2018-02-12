@@ -24,13 +24,14 @@ const update = async function(args) {
   // Orchestrion Rolls
   if (!config || config.music) {
     message('Orchestrion Rolls')
+    await require('./orchestrionrolls/list.js').fetch(orchestrionUi)
     await require('./orchestrionrolls/data.js').fetch()
-    await require('./orchestrionrolls/list.js').fetch()
   }
   if (config && config.musicList) {
     await require('./orchestrionrolls/list.js').fetch(orchestrionUi)
   }
-  if (config && config.musicCsv) {
+
+  if (config && config.updateCSV) {
     await require('./orchestrionrolls/csv.js').fetch()
   }
 }
