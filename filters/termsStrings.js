@@ -5,11 +5,11 @@ const expansions = {
   sb:     4
 }
 
-// // Strings and localisations should be kept in the following order:
-// // [english, deutsch, french, japanese]
-// //
-// // If any language uses a duplicate of the English translation, mark as
-// // true
+// Strings and localisations should be kept in the following order:
+// [english, deutsch, french, japanese]
+//
+// If any language uses a duplicate of the English translation, mark as
+// true
 
 const beastTribe = {
   amaljaa:  ['Amalj\'aa', '', '', ''],
