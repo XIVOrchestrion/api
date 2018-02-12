@@ -56,19 +56,19 @@ const vendors = {
 
 const helper = {
   purchase: (cost, currency, vendor) => {
-      return o(
-        'purchase',
-        [
-          cost, currency,
-          vendor[0],
-          vendor[1],
-          vendor[2],
-          vendor[3], vendor[4]
-        ],
-        true,
-        false
-      )
-    },
+    return o(
+      'purchase',
+      [
+        cost, currency,
+        vendor[0],
+        vendor[1],
+        vendor[2],
+        vendor[3], vendor[4]
+      ],
+      true,
+      false
+    )
+  },
   msq: (name, level) => {
     return o(
       'msq',
@@ -103,11 +103,10 @@ const helper = {
 
 module.exports = (song, achievement) => {
   switch (song.id) {
-
     case 16804:
       return [
-        helper.purchase(5000, currency.gil, vendors.maisenta)
-        helper.purchase(5000, currency.gil, vendors.bangoZango)
+        helper.purchase(5000, currency.gil, vendors.maisenta),
+        helper.purchase(5000, currency.gil, vendors.bangoZango),
         helper.purchase(5000, currency.gil, vendors.roarich)
       ]
 
