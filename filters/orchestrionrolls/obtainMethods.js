@@ -103,6 +103,50 @@ const helper = {
 
 module.exports = (song, achievement) => {
   switch (song.id) {
+    case 14221: 
+      return helper.purchase(5000, currency.mgp, vendors.goldSaucerAttendant)
+
+    case 14222:
+    case 15801:
+    case 15810:
+      return helper.purchase(5000, currency.gil, vendors.maisenta)
+
+    case 14223:
+    case 15800:
+    case 15809:
+      return helper.purchase(5000, currency.gil, vendors.bangoZango)
+
+    case 14224:
+    case 15799:
+    case 15808:
+      return helper.purchase(5000, currency.gil, vendors.roarich)
+
+    case 14225:
+    case 15802:
+    case 16802:
+    case 16803:
+      return helper.purchase(5000, currency.gil, vendors.frine)
+
+    case 14227:
+      return helper.purchase(10000, currency.mgp, vendors.goldSaucerAttendant)
+
+    case 14228:
+      return helper.purchase(15000, currency.mgp, vendors.goldSaucerAttendant)  
+
+    case 14233:
+    case 17642:
+    case 17642:
+      return helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant)
+
+    case 14248:
+    case 22485:
+    case 22488:
+      return helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant)
+
+    case 15824:
+    case 16811:
+      return helper.purchase(20000, currency.mgp, vendors.goldSaucerAttendant)
+        
     case 16804:
       return [
         helper.purchase(5000, currency.gil, vendors.maisenta),
