@@ -84,8 +84,6 @@ function process(data) {
     fs.exists(filePath, (exists) => {
       d = formatData.call(this, d)
 
-      console.log(exists)
-
       if (exists)
         return ((d, fileName, logMessage) => {
           fs.readFile(filePath, 'utf8', (e, data) => {
