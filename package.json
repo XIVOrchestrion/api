@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Mock API for FadedCopy",
   "private": true,
-  "main": "scripts/update.js",
+  "main": "update.js",
   "keywords": [
     "javascript"
   ],
@@ -16,8 +16,8 @@
     "request": "^2.83.0"
   },
   "scripts": {
-    "start": "node ./scripts/update",
-    "start-music": "node ./scripts/update music",
-    "start-musiclist": "node ./scripts/update musicList"
+    "start": "node update",
+    "start-music": "node update music",
+    "start-musiclist": "node update musicList"
   }
 }
