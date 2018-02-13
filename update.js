@@ -1,8 +1,8 @@
 const fs                   = require('fs')
-const csvOrchestrion       = require(`./scripts/orchestrionrolls/csv.js`)
-const orchestrionRollsList = require(`./scripts/orchestrionrolls/list.js`)
-const orchestrionRollsData = require(`./scripts/orchestrionrolls/data.js`)
-const patchesList          = require(`./scripts/patches/list.js`)
+const csvOrchestrion       = require('./scripts/orchestrionrolls/csv.js')
+const orchestrionRollsList = require('./scripts/orchestrionrolls/list.js')
+const orchestrionRollsData = require('./scripts/orchestrionrolls/data.js')
+const patchesList          = require('./scripts/patches/list.js')
 
 
 const update = async function(args) {
@@ -15,7 +15,7 @@ const update = async function(args) {
 
   let orchestrionUi
 
-  await new Promise((resolve) => fs.readFile(`./scripts/docs/orchestrionUi.json`, 'utf8', (e, data) => {
+  await new Promise((resolve) => fs.readFile(`./docs/orchestrionUi.json`, 'utf8', (e, data) => {
     resolve(data)
   })).then(data => orchestrionUi = JSON.parse(data))
 

@@ -77,7 +77,7 @@ function process(data) {
     return console.error(data.error)
 
   const fileName = this.dest
-  const filePath = `../docs/${fileName}.json`
+  const filePath = `./docs/${fileName}.json`
   let logMessage = `${fileName} @ ${filePath} `
 
   fs.exists(filePath, (exists) => {
@@ -102,7 +102,7 @@ function process(data) {
 
 
 function createJSON(fileName, data, logMessage, isNew) {
-  fs.writeFile(`../docs/${fileName}.json`, JSON.stringify(data), 'utf8', () => {
+  fs.writeFile(`./docs/${fileName}.json`, JSON.stringify(data), 'utf8', () => {
     console.log(logMessage)
 
     if (isNew)

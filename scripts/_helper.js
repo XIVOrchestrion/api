@@ -11,7 +11,7 @@ const Papa  = require('papaparse')
 module.exports = class Helper {
   constructor(name, plural, config, callback) {
     this.api         = config.api
-    this.dest        = `../docs/${(config.dest ? config.dest + '/' : '')}`
+    this.dest        = `./docs/${(config.dest ? config.dest + '/' : '')}`
     this.csvFiles    = config.csvFiles
     this.columns     = config.columns
     this.format      = config.format
@@ -83,6 +83,8 @@ function process(data) {
 
     fs.exists(filePath, (exists) => {
       d = formatData.call(this, d)
+
+      console.log(exists)
 
       if (exists)
         return ((d, fileName, logMessage) => {
