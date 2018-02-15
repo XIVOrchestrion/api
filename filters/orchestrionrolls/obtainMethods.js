@@ -5,6 +5,7 @@ const {
   beastTribe,
   beastTribeRanks,
   currency,
+  events,
   locales,
   vendorNames,
   vendorMenus,
@@ -94,8 +95,61 @@ const helper = {
       false,
     )
   },
-  achievement: () => {
+  crafted: (level, stars, specialist, materials) => {
     return o(
+      'craft',
+      [
+        level, stars,
+        ['Alchemist', '', '', ''],
+        specialist
+      ],
+      true,
+      false,
+      {
+        // Recipe
+      }
+    )
+  },
+  achievement: (achievementId) => {
+    return o(
+      'achievement',
+      [
+        ['Jonathas', true, true, 'ジョナサス'],
+        locales.oldGridania,
+        10.6, 6.3
+      ],
+      true,
+      false,
+      {
+        //achievement: getAchievement(achievements, achievementId)
+      }
+    )
+  },
+  seasonalPurchase: (cost, currency, vendor, year, event, available) => {
+    return o(
+      'seasonalPurchase',
+      [
+        cost, currency,
+        vendor[0],
+        vendor[1],
+        vendor[2],
+        vendor[3], vendor[4],
+        year,
+        event
+      ],
+      available,
+      false
+    )
+  },
+  fadedTrial: (name, level) => {
+    return o(
+      'fadedTrial',
+      [
+        name,
+        level
+      ],
+      true,
+      false,
     )
   },
 }
@@ -127,21 +181,104 @@ module.exports = (song, achievement) => {
     case 16803:
       return helper.purchase(5000, currency.gil, vendors.frine)
 
+    case 14226:
+      return helper.purchase(5000, currency.gil, vendors.hanekoBurneko)
+
     case 14227:
       return helper.purchase(10000, currency.mgp, vendors.goldSaucerAttendant)
 
     case 14228:
       return helper.purchase(15000, currency.mgp, vendors.goldSaucerAttendant)  
 
+    case 14232:
+      return helper.achievement(1433)
+
     case 14233:
     case 17642:
-    case 17642:
+    case 17643:
       return helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant)
+
+    case 14236:
+      return helper.seasonalPurchase(5, currency.fortuneEgg, vendors.hismena, 2016, events.hatchingTide, false) // TODO: Fix this
+
+    case 14237:
+      return helper.purchase(6, currency.amber, vendors.amberTrader)
+
+    case 14238:
+      return helper.purchase(3, currency.amber, vendors.amberTrader)
+
+    case 14241:
+      return [
+        helper.fadedDuty(locales.duty.sastasha, 15),
+        helper.fadedDuty(locales.duty.sastashaHard, 50),
+        helper.crafted(30, false, false)
+      ]
+
+    case 14242:
+      return [
+        helper.fadedDuty(locales.duty.tamtara, 16),
+        helper.fadedDuty(locales.duty.tamtaraHard, 50),
+        helper.crafted(30, false, false) 
+      ]
+
+    case 14243:
+      return [
+        helper.fadedDuty(locales.duty.copperbellMines, 15),
+        helper.fadedDuty(locales.duty.copperbellMinesHard, 50),
+        helper.crafted(30, false, false)
+      ]
+
+    case 14244:
+      return [
+        helper.fadedDuty(locales.duty.pharosSirius, 50),
+        helper.fadedDuty(locales.duty.pharosSiriusHard, 60),
+        helper.crafted(50, 2, false)
+      ]
+
+    case 14245:
+      return [
+        helper.fadedDuty(locales.duty.theAetherochemicalResearchFacility, 60),
+        helper.crafted(60, false, false)
+      ]
+
+    case 14246:
+      return [
+        helper.fadedDuty(locales.duty.theAntitower, 60),
+        helper.crafted(60, 1, false)
+      ]
+
+    case 14247:
+      return [
+        helper.fadedDuty(locales.duty.theLostCityOfAmdapor, 50),
+        helper.fadedDuty(locales.duty.theLostCityOfAmdaporHard, 60),
+        helper.crafted(50, 2, false)
+      ]
 
     case 14248:
     case 22485:
     case 22488:
       return helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant)
+
+    case 14249:
+      helper.achievement(1434)
+
+    case 14251:
+      return [
+        helper.fadedTrial(locales.trial.theBowlOfEmbersExtreme, 50),
+      ]
+
+    case 14252:
+      return [
+        helper.fadedTrial(locales.trial.theHowlingEyeExtreme, 50),
+      ]
+
+    case 14253:
+      return [
+        helper.fadedTrial(locales.trial.theNavelExtreme, 50)
+      ]
+
+    case 14266:
+      helper.purchase(375, currency.tomePoet, vendors.hismena)
 
     case 15824:
     case 16811:
