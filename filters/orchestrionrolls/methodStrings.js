@@ -5,8 +5,8 @@ module.exports = {
   msq: { en: 'Main Scenario Quest reward for completing \'{1}\' (lv. {2}).' },
   // Complete the quest 'Of Endings And Beginnings' (lv. 60) from Biggs in The Answering Quarter, The Dravanian Hinterlands (x: 17, y: 22).
   quest: { en: 'Complete the quest \'{1}\' (lv. {2}) from {3} in {4} (x: {5}, y: {6}).' },
-  // Crafted as an Alchemist 
-  craft: { en: '' },
+  // Crafted from a lv. 70 ★★★ Alchemist recipe. Specialist required. __recipe__ 
+  craft: { en: 'Crafted from a lv. {1}{2} {3} recipe. {4}' },
   // Earn the __achievement__ achievement, then speak to Jonathas in Old Gridania (x10.5, y6.3) to claim your reward.
   achievement: { en: 'Earn the __achievement__ achievement, then speak to {1} in {2} (x{3}, y4) to claim your reward.' },
   // Achieve Friendly reputation with the Sylphs Beast Tribe, then purchase for 3 Sylphic Goldleafs from the Sylph Vendor in Little Solace, East Shroud (x: , y: ).
@@ -19,6 +19,9 @@ module.exports = {
   fateSeriesPurchase: { en: 'Complete all FATEs in the \'{1}\' series with a gold rating, starting from \'{2}\' (lv. {3}) (x: {4}, y: {5}), and then purchase from {6} in {7} (x: {8}, y: {9}).' },
   // Randomly awarded from treasure chests in the Aquapolis, from vault 4 onwards.
   treasureVault: { en: 'Randomly awarded from treasure chests in {1}, from vault {2} onwards.' },
+  // Complete the 2016 Hatching-tide event quest '' from
+  seasonalQuest: {en: 'Complete the {1} {2} event quest \'{3}\' (lv. {4}) from {5} in {6} (x: {7}, y: {8})'},
+  seasonalPurchase: {en: 'Purchase for {1} {2} from {3} in {4} (x: {5}, y: {6}) during the {7} {8} event.'},
   // Available for purchase from the MogStation.
   mogstation: { en: 'Available for purchase from the {1}.' },
   // Purchase ... from the Square Enix Store and redeem the promotional code on or before ... .
@@ -28,7 +31,7 @@ module.exports = {
   // Faded material randomly obtained from the final chest in the duty 'Pharos Sirius (Normal/Hard)' (lv. 50/60).
   fadedDungeon: { en: 'Faded material randomly obtained from the final chest in the duty \'{1}\' (lv. {2}).' },
   // Faded material randomly obtained from the trial 'The Bowl of Embers (Extreme)' (lv. 50).
-  fadedDuty: { en: 'Faded material randomly obtained from the trial \'{1}\' (lv. {2}).' },
+  fadedTrial: { en: 'Faded material randomly obtained from the trial \'{1}\' (lv. {2}).' },
   // Faded material randomly obtained from Airship Voyages to Sector 23 and above.
   fadedExploratory: { en: 'Faded material randomly obtained from {1} Voyages to {2} {3} and above.' }
 }
