@@ -1,7 +1,8 @@
-const Helper        = require('../_helper')
-const createList    = require('../_list')
-const obtainMethod  = require('../../filters/orchestrionrolls/obtainMethods')
-const methodStrings = require('../../filters/orchestrionrolls/methodStrings')
+const Helper          = require('../_helper')
+const createList      = require('../_list')
+const obtainMethod    = require('../../filters/orchestrionrolls/obtainMethods')
+const methodStrings   = require('../../filters/orchestrionrolls/methodStrings')
+const categoryStrings = require('../../filters/orchestrionrolls/categoryStrings')
 
 const api          = 'item'
 const name         = 'Orchestrion Roll'
@@ -26,6 +27,7 @@ module.exports = new Helper(name, plural, {
   format: (data, args) => {
     return {
       methods: methodStrings,
+      categories: categoryStrings,
       data: data.filter(entry => {
         if (entry.item_ui_category !== itemCategory)
           return false
