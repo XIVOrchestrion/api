@@ -45,14 +45,16 @@ module.exports = new Helper(name, plural, {
         if (method && !(method instanceof Array))
           method = [method]
 
-        
+        const nameEn = entry.name_en.replace(' Orchestrion Roll', '')
+        const nameJp = entry.name_ja.replace('オーケストリオン譜:', '')
+       
         return {
           id:   entry.id,
           name: {
-            de: entry.name_de,
-            en: entry.name_en,
-            fr: entry.name_fr,
-            jp: entry.name_ja,
+            de: nameEn,
+            en: nameEn,
+            fr: nameEn,
+            jp: nameJp,
           },
           category: ui[entry.item_action].category,
           order:    ui[entry.item_action].order,
