@@ -141,6 +141,31 @@ const helper = {
       false
     )
   },
+  fadedPurchase: (cost, currency, vendor) => {
+    return o(
+      'fadedPurchase',
+      [
+        cost, currency,
+        vendor[0],
+        vendor[1],
+        vendor[2],
+        vendor[3], vendor[4]
+      ],
+      true,
+      false
+    )
+  },
+  fadedDuty: (name, level) => {
+    return o(
+      'fadedDuty',
+      [
+        name,
+        level
+      ],
+      true,
+      false,
+    )
+  },
   fadedTrial: (name, level) => {
     return o(
       'fadedTrial',
@@ -154,144 +179,277 @@ const helper = {
   },
 }
 
-
 module.exports = (song, achievement) => {
-  switch (song.id) {
-    case 14221: 
-      return helper.purchase(5000, currency.mgp, vendors.goldSaucerAttendant)
 
-    case 14222:
-    case 15801:
-    case 15810:
-      return helper.purchase(5000, currency.gil, vendors.maisenta)
+  const methods = {
+    14221: helper.purchase(5000, currency.mgp, vendors.goldSaucerAttendant),
+    14222: helper.purchase(5000, currency.gil, vendors.maisenta),
+    14223: helper.purchase(5000, currency.gil, vendors.bangoZango),
+    14224: helper.purchase(5000, currency.gil, vendors.roarich),
+    14225: helper.purchase(5000, currency.gil, vendors.frine),
+    14226: helper.purchase(5000, currency.gil, vendors.hanekoBurneko),
+    14227: helper.purchase(10000, currency.mgp, vendors.goldSaucerAttendant),
+    14228: helper.purchase(15000, currency.mgp, vendors.goldSaucerAttendant),
+    14229: [
+      helper.fadedPurchase(500, currency.tomePoet, vendors.auriana),
+      helper.crafted(50, false, false)
+    ],
 
-    case 14223:
-    case 15800:
-    case 15809:
-      return helper.purchase(5000, currency.gil, vendors.bangoZango)
+    14232: helper.achievement(1433),
+    14233: helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant),
 
-    case 14224:
-    case 15799:
-    case 15808:
-      return helper.purchase(5000, currency.gil, vendors.roarich)
+    14236: helper.seasonalPurchase(
+      5, ['Fortune Egg', 'Strahlendes Glücksei', 'Prœuf de la fortune', 'フォーチュンエッグ'],
+      [
+        ['Dreamer', 'Träumerin', 'Rêveuse', 'エッグドリーマー'],
+        false,
+        locales.uldahStepsOfNald,
+        10.6, 9.9
+      ],
+      2016, events.hatchingTide,
+      false
+    ),
+    14237: helper.purchase(6, currency.amber, vendors.amberTrader),
+    14238: helper.purchase(3, currency.amber, vendors.amberTrader),
 
-    case 14225:
-    case 15802:
-    case 16802:
-    case 16803:
-      return helper.purchase(5000, currency.gil, vendors.frine)
+    14241: [
+      helper.fadedDuty(locales.duty.sastasha, 15),
+      helper.fadedDuty(locales.duty.sastashaHard, 50),
+      helper.crafted(30, false, false)
+    ],
+    14242: [
+      helper.fadedDuty(locales.duty.tamtara, 16),
+      helper.fadedDuty(locales.duty.tamtaraHard, 50),
+      helper.crafted(30, false, false) 
+    ],
+    14243: [
+      helper.fadedDuty(locales.duty.copperbellMines, 15),
+      helper.fadedDuty(locales.duty.copperbellMinesHard, 50),
+      helper.crafted(30, false, false)
+    ],
 
-    case 14226:
-      return helper.purchase(5000, currency.gil, vendors.hanekoBurneko)
+    14244: [
+      helper.fadedDuty(locales.duty.pharosSirius, 50),
+      helper.fadedDuty(locales.duty.pharosSiriusHard, 60),
+      helper.crafted(50, 2, false)
+    ],
+    14245: [
+      helper.fadedDuty(locales.duty.theAetherochemicalResearchFacility, 60),
+      helper.crafted(60, false, false)
+    ],
+    14246: [
+      helper.fadedDuty(locales.duty.theAntitower, 60),
+      helper.crafted(60, 1, false)
+    ],
+    14247: [
+      helper.fadedDuty(locales.duty.theLostCityOfAmdapor, 50),
+      helper.fadedDuty(locales.duty.theLostCityOfAmdaporHard, 60),
+      helper.crafted(50, 2, false)
+    ],
+    14248: helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant),
+    14249: helper.achievement(1434),
+    14251: [
+      helper.fadedTrial(locales.trial.theBowlOfEmbersExtreme, 50),
+    ],
+    14252: [
+      helper.fadedTrial(locales.trial.theHowlingEyeExtreme, 50),
+    ],
+    14253: [
+      helper.fadedTrial(locales.trial.theNavelExtreme, 50)
+    ],
 
-    case 14227:
-      return helper.purchase(10000, currency.mgp, vendors.goldSaucerAttendant)
+    14266: helper.purchase(375, currency.tomePoet, vendors.hismena),
 
-    case 14228:
-      return helper.purchase(15000, currency.mgp, vendors.goldSaucerAttendant)  
+    15799: helper.purchase(5000, currency.gil, vendors.roarich),
+    15800: helper.purchase(5000, currency.gil, vendors.bangoZango),
+    15801: helper.purchase(5000, currency.gil, vendors.maisenta),
+    15802: helper.purchase(5000, currency.gil, vendors.frine),
 
-    case 14232:
-      return helper.achievement(1433)
+    15808: helper.purchase(5000, currency.gil, vendors.roarich),
+    15809: helper.purchase(5000, currency.gil, vendors.bangoZango),
+    15810: helper.purchase(5000, currency.gil, vendors.maisenta),
 
-    case 14233:
-    case 17642:
-    case 17643:
-      return helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant)
+    15824: helper.purchase(20000, currency.mgp, vendors.goldSaucerAttendant),
 
-    case 14236:
-      return helper.seasonalPurchase(5, currency.fortuneEgg, vendors.hismena, 2016, events.hatchingTide, false) // TODO: Fix this
+    16802: helper.purchase(5000, currency.gil, vendors.frine),
+    16803: helper.purchase(5000, currency.gil, vendors.frine),
+    16804: [
+      helper.purchase(5000, currency.gil, vendors.maisenta),
+      helper.purchase(5000, currency.gil, vendors.bangoZango),
+      helper.purchase(5000, currency.gil, vendors.roarich)
+    ],
 
-    case 14237:
-      return helper.purchase(6, currency.amber, vendors.amberTrader)
+    16811: helper.purchase(20000, currency.mgp, vendors.goldSaucerAttendant),
 
-    case 14238:
-      return helper.purchase(3, currency.amber, vendors.amberTrader)
+    17642: helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant),
+    17643: helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant),
 
-    case 14241:
-      return [
-        helper.fadedDuty(locales.duty.sastasha, 15),
-        helper.fadedDuty(locales.duty.sastashaHard, 50),
-        helper.crafted(30, false, false)
-      ]
-
-    case 14242:
-      return [
-        helper.fadedDuty(locales.duty.tamtara, 16),
-        helper.fadedDuty(locales.duty.tamtaraHard, 50),
-        helper.crafted(30, false, false) 
-      ]
-
-    case 14243:
-      return [
-        helper.fadedDuty(locales.duty.copperbellMines, 15),
-        helper.fadedDuty(locales.duty.copperbellMinesHard, 50),
-        helper.crafted(30, false, false)
-      ]
-
-    case 14244:
-      return [
-        helper.fadedDuty(locales.duty.pharosSirius, 50),
-        helper.fadedDuty(locales.duty.pharosSiriusHard, 60),
-        helper.crafted(50, 2, false)
-      ]
-
-    case 14245:
-      return [
-        helper.fadedDuty(locales.duty.theAetherochemicalResearchFacility, 60),
-        helper.crafted(60, false, false)
-      ]
-
-    case 14246:
-      return [
-        helper.fadedDuty(locales.duty.theAntitower, 60),
-        helper.crafted(60, 1, false)
-      ]
-
-    case 14247:
-      return [
-        helper.fadedDuty(locales.duty.theLostCityOfAmdapor, 50),
-        helper.fadedDuty(locales.duty.theLostCityOfAmdaporHard, 60),
-        helper.crafted(50, 2, false)
-      ]
-
-    case 14248:
-    case 22485:
-    case 22488:
-      return helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant)
-
-    case 14249:
-      helper.achievement(1434)
-
-    case 14251:
-      return [
-        helper.fadedTrial(locales.trial.theBowlOfEmbersExtreme, 50),
-      ]
-
-    case 14252:
-      return [
-        helper.fadedTrial(locales.trial.theHowlingEyeExtreme, 50),
-      ]
-
-    case 14253:
-      return [
-        helper.fadedTrial(locales.trial.theNavelExtreme, 50)
-      ]
-
-    case 14266:
-      helper.purchase(375, currency.tomePoet, vendors.hismena)
-
-    case 15824:
-    case 16811:
-      return helper.purchase(20000, currency.mgp, vendors.goldSaucerAttendant)
-        
-    case 16804:
-      return [
-        helper.purchase(5000, currency.gil, vendors.maisenta),
-        helper.purchase(5000, currency.gil, vendors.bangoZango),
-        helper.purchase(5000, currency.gil, vendors.roarich)
-      ]
-
-    default:
-      return null
+    22485: helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant),
+    22488: helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant),
   }
+
+  const thisMethod = methods[song.id] || null
+
+  if (!thisMethod)
+    console.warn(`No method could be found for Song ${song.id} (${song.name_en}). Please check methods and try again.`)
+
+  return thisMethod
 }
+
+
+// module.exports = (song, achievement) => {
+//   switch (song.id) {
+//     case 14221: 
+//       return helper.purchase(5000, currency.mgp, vendors.goldSaucerAttendant)
+
+//     case 14222:
+//     case 15801:
+//     case 15810:
+//       return helper.purchase(5000, currency.gil, vendors.maisenta)
+
+//     case 14223:
+//     case 15800:
+//     case 15809:
+//       return helper.purchase(5000, currency.gil, vendors.bangoZango)
+
+//     case 14224:
+//     case 15799:
+//     case 15808:
+//       return helper.purchase(5000, currency.gil, vendors.roarich)
+
+//     case 14225:
+//     case 15802:
+//     case 16802:
+//     case 16803:
+//       return helper.purchase(5000, currency.gil, vendors.frine)
+
+//     case 14226:
+//       return helper.purchase(5000, currency.gil, vendors.hanekoBurneko)
+
+//     case 14227:
+//       return helper.purchase(10000, currency.mgp, vendors.goldSaucerAttendant)
+
+//     case 14228:
+//       return helper.purchase(15000, currency.mgp, vendors.goldSaucerAttendant)  
+
+//     case 14229:
+//       return [
+//         helper.fadedPurchase(500, currency.tomePoet, vendors.auriana),
+//         helper.crafted(50, false, false)
+//       ]
+
+//     case 14232:
+//       return helper.achievement(1433)
+
+//     case 14233:
+//     case 17642:
+//     case 17643:
+//       return helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant)
+
+//     case 14236:
+//       return helper.seasonalPurchase(
+//         5, ['Fortune Egg', 'Strahlendes Glücksei', 'Prœuf de la fortune', 'フォーチュンエッグ'],
+//         [
+//           ['Dreamer', 'Träumerin', 'Rêveuse', 'エッグドリーマー'],
+//           false,
+//           locales.uldahStepsOfNald,
+//           10.6, 9.9
+//         ],
+//         2016, events.hatchingTide,
+//         false
+//       )
+
+//     case 14237:
+//       return helper.purchase(6, currency.amber, vendors.amberTrader)
+
+//     case 14238:
+//       return helper.purchase(3, currency.amber, vendors.amberTrader)
+
+//     case 14241:
+//       return [
+//         helper.fadedDuty(locales.duty.sastasha, 15),
+//         helper.fadedDuty(locales.duty.sastashaHard, 50),
+//         helper.crafted(30, false, false)
+//       ]
+
+//     case 14242:
+//       return [
+//         helper.fadedDuty(locales.duty.tamtara, 16),
+//         helper.fadedDuty(locales.duty.tamtaraHard, 50),
+//         helper.crafted(30, false, false) 
+//       ]
+
+//     case 14243:
+//       return [
+//         helper.fadedDuty(locales.duty.copperbellMines, 15),
+//         helper.fadedDuty(locales.duty.copperbellMinesHard, 50),
+//         helper.crafted(30, false, false)
+//       ]
+
+//     case 14244:
+//       return [
+//         helper.fadedDuty(locales.duty.pharosSirius, 50),
+//         helper.fadedDuty(locales.duty.pharosSiriusHard, 60),
+//         helper.crafted(50, 2, false)
+//       ]
+
+//     case 14245:
+//       return [
+//         helper.fadedDuty(locales.duty.theAetherochemicalResearchFacility, 60),
+//         helper.crafted(60, false, false)
+//       ]
+
+//     case 14246:
+//       return [
+//         helper.fadedDuty(locales.duty.theAntitower, 60),
+//         helper.crafted(60, 1, false)
+//       ]
+
+//     case 14247:
+//       return [
+//         helper.fadedDuty(locales.duty.theLostCityOfAmdapor, 50),
+//         helper.fadedDuty(locales.duty.theLostCityOfAmdaporHard, 60),
+//         helper.crafted(50, 2, false)
+//       ]
+
+//     case 14248:
+//     case 22485:
+//     case 22488:
+//       return helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant)
+
+//     case 14249:
+//       helper.achievement(1434)
+
+//     case 14251:
+//       return [
+//         helper.fadedTrial(locales.trial.theBowlOfEmbersExtreme, 50),
+//       ]
+
+//     case 14252:
+//       return [
+//         helper.fadedTrial(locales.trial.theHowlingEyeExtreme, 50),
+//       ]
+
+//     case 14253:
+//       return [
+//         helper.fadedTrial(locales.trial.theNavelExtreme, 50)
+//       ]
+
+//     case 14266:
+//       helper.purchase(375, currency.tomePoet, vendors.hismena)
+
+//     case 15824:
+//     case 16811:
+//       return helper.purchase(20000, currency.mgp, vendors.goldSaucerAttendant)
+        
+//     case 16804:
+//       return [
+//         helper.purchase(5000, currency.gil, vendors.maisenta),
+//         helper.purchase(5000, currency.gil, vendors.bangoZango),
+//         helper.purchase(5000, currency.gil, vendors.roarich)
+//       ]
+
+//     default:
+//       return null
+//   }
+// }
