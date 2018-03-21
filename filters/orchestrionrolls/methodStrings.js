@@ -27,7 +27,7 @@ module.exports = {
   // Purchase ... from the Square Enix Store and redeem the promotional code on or before ... .
   premium: { en: 'Purchase {0} from the {1} and redeem the promotional code on or before {2}.' },
   // Faded material purchased for 1,000 Allagan Tomestones of Poetics from Auriana in Mor Dhona (x11, y11).
-  fadedPurchase: { en: 'Faded material purchased for {0} {1} from {2} in {3} (x: {4}, y: {5}).' },
+  fadedPurchase: { en: 'Faded material purchased for {0} {1} from {2} {3} in {4} (x: {5}, y: {6}).' },
   // Faded material randomly obtained from the final chest in the duty 'Pharos Sirius (Normal/Hard)' (lv. 50/60).
   fadedDuty: { en: 'Faded material randomly obtained from the final chest in the duty \'{0}\' (lv. {1}).' },
   // Faded material randomly obtained from the trial 'The Bowl of Embers (Extreme)' (lv. 50).
