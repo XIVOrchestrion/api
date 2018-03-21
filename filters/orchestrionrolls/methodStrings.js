@@ -31,7 +31,7 @@ module.exports = {
   // Faded material randomly obtained from the final chest in the duty 'Pharos Sirius (Normal/Hard)' (lv. 50/60).
   fadedDungeon: { en: 'Faded material randomly obtained from the final chest in the duty \'{0}\' (lv. {1}).' },
   // Faded material randomly obtained from the trial 'The Bowl of Embers (Extreme)' (lv. 50).
-  fadedTrial: { en: 'Faded material randomly obtained from the trial \'{0}\' (lv. {1}).' },
+  fadedDuty: { en: 'Faded material randomly obtained from the trial \'{0}\' (lv. {1}).' },
   // Faded material randomly obtained from Airship Voyages to Sector 23 and above.
   fadedExploratory: { en: 'Faded material randomly obtained from {0} Voyages to {1} {2} and above.' }
 }
