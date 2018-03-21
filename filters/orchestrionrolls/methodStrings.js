@@ -29,9 +29,9 @@ module.exports = {
   // Faded material purchased for 1,000 Allagan Tomestones of Poetics from Auriana in Mor Dhona (x11, y11).
   fadedPurchase: { en: 'Faded material purchased for {0} {1} from {2} in {3} (x: {4}, y: {5}).' },
   // Faded material randomly obtained from the final chest in the duty 'Pharos Sirius (Normal/Hard)' (lv. 50/60).
-  fadedDungeon: { en: 'Faded material randomly obtained from the final chest in the duty \'{0}\' (lv. {1}).' },
+  fadedDuty: { en: 'Faded material randomly obtained from the final chest in the duty \'{0}\' (lv. {1}).' },
   // Faded material randomly obtained from the trial 'The Bowl of Embers (Extreme)' (lv. 50).
-  fadedDuty: { en: 'Faded material randomly obtained from the trial \'{0}\' (lv. {1}).' },
+  fadedTrial: { en: 'Faded material randomly obtained from the trial \'{0}\' (lv. {1}).' },
   // Faded material randomly obtained from Airship Voyages to Sector 23 and above.
   fadedExploratory: { en: 'Faded material randomly obtained from {0} Voyages to {1} {2} and above.' }
 }
