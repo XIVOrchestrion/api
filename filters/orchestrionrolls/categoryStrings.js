@@ -1,9 +1,9 @@
 module.exports = {
-  locales:    [ 'Locales', 'Orte', 'Lieux', 'フィールド' ],
-  dungeons:   [ 'Dungeons', true, 'Donjons', 'ダンジョン' ],
-  primal:     [ 'Primal Battles', 'Primae', 'Défis', '討伐・討滅戦' ],
-  raid:       [ 'Raids', true, true, 'レイド' ],
-  other:      [ 'Others', 'Andere', 'Divers', 'その他' ],
-  seasonal:   [ 'Seasonal', 'Saisonales Ereignis', 'Événements', 'シーズナル' ],
-  mogStation: [ 'Mog Station', 'Mogry-Kiosk', 'Station Mog', 'モグステーション' ]
+  2: [ 'Locales', 'Orte', 'Lieux', 'フィールド' ],
+  3: [ 'Dungeons', true, 'Donjons', 'ダンジョン' ],
+  4: [ 'Primal Battles', 'Primae', 'Défis', '討伐・討滅戦' ],
+  5: [ 'Raids', true, true, 'レイド' ],
+  6: [ 'Others', 'Andere', 'Divers', 'その他' ],
+  7: [ 'Seasonal', 'Saisonales Ereignis', 'Événements', 'シーズナル' ],
+  8: [ 'Mog Station', 'Mogry-Kiosk', 'Station Mog', 'モグステーション' ]
 }
