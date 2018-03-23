@@ -78,10 +78,15 @@ const currency = {
 }
 
 const events = {
+  allSaintsWake:        ['All Saints\'s Wake' , '', '', ''],
   hatchingTide:         ['Hatching-tide', '', '', ''],
-  starlightCelebration: ['', '', '', ''],
-  valentionesDay:       ['', '', '', ''],
-  littleLadiesDay:      ['', '', '', ''],
+  heavensturn:          ['Heavensturn', '', '', ''],
+  littleLadiesDay:      ['Little Ladies\'s Day', '', '', ''],
+  makeItRain:           ['The Make It Rain Campaign', '', '', ''],
+  moonfireFaire:        ['Moonfire Faire', '', '', ''],
+  starlightCelebration: ['Starlight Celebration', '', '', ''],
+  theRising:            ['The Rising', '', '', ''],
+  valentionesDay:       ['Valentione\'s Day', '', '', ''],
 }
 
 const locales = {
@@ -155,8 +160,8 @@ const locales = {
   trial: {
     ultimasBane:            ['The Minstrel\'s Ballad: Ultima\'s Bane', 'Heldenlied Von Ultima', 'Le Fléau D\'Ultima', '究極幻想 アルテマウェポン破壊作戦'],
     theBowlOfEmbersExtreme: ['The Bowl Of Embers (Extreme)', 'Zenit Der Götter - Ifrit', 'Le Cratère Des Tisons (extrême)', '極イフリート討滅戦'],
-    theHowlingEyeExtreme:   [],
-    theNavelExtreme:        [],
+    theHowlingEyeExtreme:   ['The Howling Eye (Extreme)', '', '', ''],
+    theNavelExtreme:        ['The Navel (Extreme)', '', '', ''],
     thordansReign:          [],
     containmentBayS1T7:     [],
     theBindingCoilT5:       [],
@@ -178,7 +183,7 @@ const vendorNames = {
   chachamun:         ['Chachamun', true, true, '武具屋 チャチャムン'],
   eUnaKotor:         ['E-Una-Kotor', true, true, 'エ・ウナ・コトロ'],
   frine:             ['Frine', true, true, 'よろず屋 フリヌ'],
-  goldSaucerPrize:   ['Gold Saucer Attendant (Prize Exchange)', 'Sonderartikel-Händlerin', 'Préposée Aux Lots', '景品交換窓口'],
+  goldSaucerPrize:   ['Gold Saucer Attendant', 'Sonderartikel-Händlerin', 'Préposée Aux Lots', '景品交換窓口'],
   hanekoBurneko:     ['Haneko Burneko', true, true, '雑貨商人 ハネコ・ブンネコ'],
   hismena:           ['Hismena', true, true, 'ヒスメナ'],
   housingMerchant:   ['Housing Merchant', 'Krämer', 'Quincaillier', 'よろず屋'],
@@ -186,7 +191,7 @@ const vendorNames = {
   maisenta:          ['Maisenta', true, true, '黒兎堂 マイセンタ'],
   merchantMender:    ['Merchant & Mender', 'Krämerin', 'Quincaillière', 'よろず屋'],
   roarich:           ['Roarich', true, true, 'アシュガナ貿易 ロリッヒ'],
-  stormSergeant:     ['Storm Sergeant (Materia Provisioner)', 'Versorgungsoffizier', 'Sergent Du Maelstrom', '物資支給官'],
+  stormSergeant:     ['Storm Sergeant', 'Versorgungsoffizier', 'Sergent Du Maelstrom', '物資支給官'],
   travelingMerchant: ['Traveling Merchant', 'Händlerin', 'Quincaillière', 'よろず屋'],
   tribeAmaljaa:      ['Amalj\'aa Vendor', 'Amalj\'aa-Händler', 'Vendeur Amalj\'aa', 'アマルジャ族のよろず屋'],
   tribeAnanta:       ['Madhura', true, true, 'マドゥラ'],
