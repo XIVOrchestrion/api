@@ -21,7 +21,7 @@ module.exports = {
   treasureVault: { en: 'Randomly awarded from treasure chests in {0}, from vault {1} onwards.' },
   // Complete the 2016 Hatching-tide event quest '' from
   seasonalQuest: {en: 'Complete the {0} {1} event quest \'{2}\' (lv. {3}) from {4} in {5} (x: {6}, y: {7})'},
-  seasonalPurchase: {en: 'Purchase for {0} {1} from {2} in {3} (x: {4}, y: {5}) during the {6} {7} event.'},
+  seasonalPurchase: {en: 'Purchase for {0} {1} from {2} {3} in {4} (x: {5}, y: {6}) during the {7} event.'},
   // Available for purchase from the MogStation.
   mogstation: { en: 'Available for purchase from the {0}.' },
   // Purchase ... from the Square Enix Store and redeem the promotional code on or before ... .

@@ -17,7 +17,8 @@
   },
   "scripts": {
     "start": "node update",
-    "start-music": "node update music",
-    "start-musiclist": "node update musicList"
+    "start:patches": "node update patches",
+    "start:music": "node update music",
+    "start:musiclist": "node update musicList"
   }
 }

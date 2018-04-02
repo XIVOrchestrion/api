@@ -125,7 +125,7 @@ const helper = {
       }
     )
   },
-  seasonalPurchase: (cost, currency, vendor, year, event, available) => {
+  seasonalPurchase: (cost, currency, vendor, event, year, available) => {
     return o(
       'seasonalPurchase',
       [
@@ -134,8 +134,7 @@ const helper = {
         vendor[1],
         vendor[2],
         vendor[3], vendor[4],
-        year,
-        event
+        event.map(item => `${item} ${year}`)
       ],
       available,
       false
@@ -199,14 +198,14 @@ module.exports = (song, achievement) => {
     14233: helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant),
 
     14236: helper.seasonalPurchase(
-      5, ['Fortune Egg', 'Strahlendes Glücksei', 'Prœuf de la fortune', 'フォーチュンエッグ'],
+      5, ['Fortune Eggs', 'Strahlendes Glücksei', 'Prœuf de la fortune', 'フォーチュンエッグ'],
       [
         ['Dreamer', 'Träumerin', 'Rêveuse', 'エッグドリーマー'],
         false,
         locales.uldahStepsOfNald,
         10.6, 9.9
       ],
-      2016, events.hatchingTide,
+      events.hatchingTide, 2016,
       false
     ),
     14237: helper.purchase(6, currency.amber, vendors.amberTrader),
