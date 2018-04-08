@@ -78,7 +78,7 @@ const currency = {
 }
 
 const events = {
-  allSaintsWake:        ['All Saints\'s Wake' , '', '', ''],
+  allSaintsWake:        ['All Saints\'s Wake', '', '', ''],
   hatchingTide:         ['Hatching-tide', '', '', ''],
   heavensturn:          ['Heavensturn', '', '', ''],
   littleLadiesDay:      ['Little Ladies\'s Day', '', '', ''],
