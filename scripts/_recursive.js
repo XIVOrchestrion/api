@@ -1,5 +1,6 @@
 const Helper = require('./_helper')
 
+
 module.exports = function(data, name, getConfig, resolve) {
   const all = data.slice(0)
   recursiveFetch(all, ...arguments)
@@ -8,7 +9,6 @@ module.exports = function(data, name, getConfig, resolve) {
 
 function recursiveFetch(all, data, name, getConfig, resolve) {
   const entry = data.shift()
-
   new Helper(
     `${name} ${entry.id}`,
     name,
