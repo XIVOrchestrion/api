@@ -5,8 +5,6 @@ module.exports = function(fileName, data, base, _helperCreateJSONFn) {
 
   fs.exists(filePath, (exists) => {
     let logMessage = fileName + " list "
-    
-    console.log(exists)
 
     if (exists)
       logMessage += "updated."
