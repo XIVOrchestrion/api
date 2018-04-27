@@ -21,7 +21,7 @@ module.exports = {
     jp: true,
   },
   craft: {
-    // Crafted from a lv. 70 *** Alchemist recipe. Specialist required. __recipe__ 
+    // Crafted from a lv. 70 *** Alchemist recipe. Specialist required. __recipe__
     de: true,
     en: 'Crafted from a lv. {0}{1} {2} recipe. {3}',
     fr: true,
@@ -96,6 +96,27 @@ module.exports = {
     fr: true,
     jp: true,
   },
+  fadedDuty: {
+    // Faded material randomly obtained from the final chest in the duty 'Pharos Sirius (Normal/Hard)' (lv. 50/60).
+    de: 'Verblaßtes Material, das nach dem Zufallsprinzip aus der letzten Truhe in der Pflicht \'{0}\' (lv. {1}) erhalten wurde.',
+    en: 'Faded material randomly obtained from the final chest in the duty \'{0}\' (lv. {1}).',
+    fr: 'Matériau dégradé obtenu aléatoirement à partir du coffre final dans le devoir \'{0}\' (lv. {1}).',
+    jp: true,
+  },
+  fadedExploratory: {
+    // Faded material randomly obtained from Airship Voyages to Sector 23 and above.
+    de: true,
+    en: 'Faded material randomly obtained from {0} Voyages to {1} and above.',
+    fr: true,
+    jp: true,
+  },
+  fadedHunt: {
+    // Faded material randomly obtained from A Rank Hunts in The Dravanian Forelands.
+    de: true,
+    en: 'Faded material randomly obtained from {0} Rank Hunts in {1}.',
+    fr: true,
+    jp: true,
+  },
   fadedPurchase: {
     // Faded material purchased for 1,000 Allagan Tomestones of Poetics from Auriana in Mor Dhona (x11, y11).
     de: true,
@@ -103,11 +124,11 @@ module.exports = {
     fr: true,
     jp: true,
   },
-  fadedDuty: {
-    // Faded material randomly obtained from the final chest in the duty 'Pharos Sirius (Normal/Hard)' (lv. 50/60).
-    de: 'Verblaßtes Material, das nach dem Zufallsprinzip aus der letzten Truhe in der Pflicht \'{0}\' (lv. {1}) erhalten wurde.',
-    en: 'Faded material randomly obtained from the final chest in the duty \'{0}\' (lv. {1}).',
-    fr: 'Matériau dégradé obtenu aléatoirement à partir du coffre final dans le devoir \'{0}\' (lv. {1}).',
+  fadedTreasureMap: {
+    // Faded material randomly obtained from Treasure Maps.
+    de: true,
+    en: 'Faded material randomly obtaiend from Treasure Maps.',
+    fr: true,
     jp: true,
   },
   fadedTrial: {
@@ -117,11 +138,4 @@ module.exports = {
     fr: true,
     jp: true,
   },
-  fadedExploratory: {
-    // Faded material randomly obtained from Airship Voyages to Sector 23 and above.
-    de: true,
-    en: 'Faded material randomly obtained from {0} Voyages to {1} {2} and above.',
-    fr: true,
-    jp: true,
-  }
 }

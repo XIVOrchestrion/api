@@ -140,6 +140,39 @@ const helper = {
       false
     )
   },
+  fadedDuty: (name, level) => {
+    return o(
+      'fadedDuty',
+      [
+        name,
+        level
+      ],
+      true,
+      false,
+    )
+  },
+  fadedExploratory: (type, zone) => {
+    return o(
+      'fadedExploratory',
+      [
+        type,
+        zone
+      ],
+      true,
+      false
+    )
+  },
+  fadedHunt: (rank, location) => {
+    return o(
+      'fadedHunt',
+      [
+        rank,
+        location
+      ],
+      true,
+      false,
+    )
+  },
   fadedPurchase: (cost, currency, vendor) => {
     return o(
       'fadedPurchase',
@@ -154,13 +187,10 @@ const helper = {
       false
     )
   },
-  fadedDuty: (name, level) => {
+  fadedTreasureMap: () => {
     return o(
-      'fadedDuty',
-      [
-        name,
-        level
-      ],
+      'fadedTreasureMap',
+      [],
       true,
       false,
     )
@@ -193,10 +223,12 @@ module.exports = (song, achievement) => {
       helper.fadedPurchase(500, currency.tomePoet, vendors.auriana),
       helper.crafted(50, false, false)
     ],
-
+    14230: helper.fadedHunt('A', locales.theDravanianForelands),
+    14231: helper.fadedHunt('A', locales.theSeaOfClouds),
     14232: helper.achievement(1433),
     14233: helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant),
-
+    14234: helper.fadedTreasureMap(),
+    14235: helper.fadedExploratory('Airship', 'Sector 23'),
     14236: helper.seasonalPurchase(
       5, ['Fortune Eggs', 'Strahlendes Glücksei', 'Prœuf de la fortune', 'フォーチュンエッグ'],
       [
@@ -210,7 +242,8 @@ module.exports = (song, achievement) => {
     ),
     14237: helper.purchase(6, currency.amber, vendors.amberTrader),
     14238: helper.purchase(3, currency.amber, vendors.amberTrader),
-
+    14239: helper.fadedPurchase(5000, currency.wolfMark, vendors.stormSergeantWolvesDen),
+    14240: helper.fadedPurchase(10000, currency.wolfMark, vendors.stormSergeantWolvesDen),
     14241: [
       helper.fadedDuty(locales.duty.sastasha, 15),
       helper.fadedDuty(locales.duty.sastashaHard, 50),
@@ -219,7 +252,7 @@ module.exports = (song, achievement) => {
     14242: [
       helper.fadedDuty(locales.duty.tamtara, 16),
       helper.fadedDuty(locales.duty.tamtaraHard, 50),
-      helper.crafted(30, false, false) 
+      helper.crafted(30, false, false)
     ],
     14243: [
       helper.fadedDuty(locales.duty.copperbellMines, 15),
