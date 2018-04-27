@@ -187,10 +187,12 @@ const helper = {
       false
     )
   },
-  fadedTreasureMap: () => {
+  fadedTreasureMap: (type) => {
     return o(
       'fadedTreasureMap',
-      [],
+      [
+        type
+      ],
       true,
       false,
     )
@@ -227,8 +229,8 @@ module.exports = (song, achievement) => {
     14231: helper.fadedHunt('A', locales.theSeaOfClouds),
     14232: helper.achievement(1433),
     14233: helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant),
-    14234: helper.fadedTreasureMap(),
-    14235: helper.fadedExploratory('Airship', 'Sector 23'),
+    14234: helper.fadedTreasureMap(['all', true, true, true]),
+    14235: helper.fadedExploratory(['Airship', true, true, true], ['Sector 23', true, true, true]),
     14236: helper.seasonalPurchase(
       5, ['Fortune Eggs', 'Strahlendes Glücksei', 'Prœuf de la fortune', 'フォーチュンエッグ'],
       [

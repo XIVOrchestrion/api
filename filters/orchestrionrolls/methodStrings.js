@@ -127,7 +127,7 @@ module.exports = {
   fadedTreasureMap: {
     // Faded material randomly obtained from Treasure Maps.
     de: true,
-    en: 'Faded material randomly obtaiend from Treasure Maps.',
+    en: 'Faded material randomly obtained from {0} Treasure Maps.',
     fr: true,
     jp: true,
   },
