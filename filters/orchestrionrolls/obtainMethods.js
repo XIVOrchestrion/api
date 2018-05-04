@@ -261,7 +261,6 @@ module.exports = (song, achievement) => {
       helper.fadedDuty(locales.duty.copperbellMinesHard, 50),
       helper.crafted(30, false, false)
     ],
-
     14244: [
       helper.fadedDuty(locales.duty.pharosSirius, 50),
       helper.fadedDuty(locales.duty.pharosSiriusHard, 60),
@@ -282,14 +281,59 @@ module.exports = (song, achievement) => {
     ],
     14248: helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant),
     14249: helper.achievement(1434),
+    14250: [
+      helper.fadedTrial(locales.trial.ultimasBane, 50),
+      helper.crafted(50, 3, false)
+    ],
     14251: [
       helper.fadedTrial(locales.trial.theBowlOfEmbersExtreme, 50),
+      helper.crafted(50, 3, false)
     ],
     14252: [
       helper.fadedTrial(locales.trial.theHowlingEyeExtreme, 50),
+      helper.crafted(50, 3, false)
     ],
     14253: [
-      helper.fadedTrial(locales.trial.theNavelExtreme, 50)
+      helper.fadedTrial(locales.trial.theNavelExtreme, 50),
+      helper.crafted(50, 3, false)
+    ],
+    14254: [
+      helper.fadedTrial(locales.trial.thordansReign, 60),
+      helper.crafted(60, 1, false)
+    ],
+    14255: [
+      helper.fadedTrial(locales.trial.containmentBayS1T7, 60),
+      helper.crafted(60, 1, false)
+    ],
+    14256: [
+      helper.fadedDuty(locales.duty.theLabyrinthOfTheAncients, 50),
+      helper.crafted(50, 4, false)
+    ],
+    14257: [
+      helper.fadedDuty(locales.duty.theLabyrinthOfTheAncients, 50),
+      helper.crafted(50, 4, false)
+    ],
+    14258: [
+      helper.fadedDuty(locales.duty.syrcusTower, 50),
+      helper.crafted(50, 4, false)
+    ],
+    14259: [
+      helper.fadedDuty(locales.duty.syrcusTower, 50),
+      helper.crafted(50, 4, false)
+    ],
+    14260: [
+      helper.fadedDuty(locales.duty.theWorldOfDarkness, 50),
+      helper.crafted(50, 4, false)
+    ],
+    14261: [
+      helper.fadedDuty(locales.duty.theWorldOfDarkness, 50),
+      helper.crafted(50, 4, false)
+    ],
+    14262: [
+      helper.fadedDuty(locales.duty.theLabyrinthOfTheAncients, 50),
+      helper.fadedDuty(locales.duty.syrcusTower, 50),
+      helper.fadedDuty(locales.duty.theWorldOfDarkness, 50),
+      helper.crafted(60, 1, false)
     ],
 
     14266: helper.purchase(375, currency.tomePoet, vendors.hismena),
