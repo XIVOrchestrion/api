@@ -33,7 +33,7 @@ const beastTribeRanks = {
   honored:    ['Honored', '', '', ''],
   sworn:      ['Sworn', 'Solidarisch', 'Assermenté', '友好関係：誓約'],
   bloodsworn: ['Bloodsworn', '', '', ''],
-  allied:     ['Allied', '', '', ''], 
+  allied:     ['Allied', '', '', ''],
 }
 
 const currencyTomes = {
@@ -141,34 +141,151 @@ const locales = {
   wolvesDenPier:            ['Wolves\' Den Pier', '', '', ''],
   yanxia:                   ['Yanxia', '', '', ''],
   duty: {
-    sastasha:                           ['Sastasha', true, true, '逆襲要害 サスタシャ浸食洞'],
-    sastashaHard:                       ['Sastasha (Hard)', 'Sastasha (schwer)', 'Sastasha (brutal)', '逆襲要害 サスタシャ浸食洞 (Hard)'],
-    tamtara:                            ['The Tam-Tara Deepcroft', 'Totenacker Tam-Tara', 'L\'Hypogée De Tam-Tara', '惨劇霊殿 タムタラの墓所'],
-    tamtaraHard:                        ['The Tam-Tara Deepcroft (Hard)', 'Totenacker Tam-Tara (schwer)', 'L\'Hypogée De Tam-Tara (brutal)', '惨劇霊殿 タムタラの墓所 (Hard)'],
-    copperbellMines:                    ['Copperbell Mines', 'Kupferglocken-Mine', 'Les Mines De Clochecuivre', '騒乱坑道 カッパーベル銅山'],
-    copperbellMinesHard:                ['Copperbell Mines (Hard)', 'Kupferglocken-Mine (schwer)', 'Les Mines De Clochecuivre (brutal)', '騒乱坑道 カッパーベル銅山 (Hard)'],
-    pharosSirius:                       ['Pharos Sirius', true, 'Le Phare De Sirius', '制圧巨塔 シリウス大灯台'],
-    pharosSiriusHard:                   ['Pharos Sirius (Hard)', 'Pharos Sirius (schwer)', 'Le Phare De Sirius (brutal)', '制圧巨塔 シリウス大灯台 (Hard)'],
-    theAetherochemicalResearchFacility: ['The Aetherochemical Research Facility', 'Ätherochemisches Forschungslabor', 'Le Laboratoire De Magismologie', '蒼天聖戦 魔科学研究所'],
-    theAntitower:                       ['The Antitower', 'Antiturm', 'L\'Antitour', '星海観測 逆さの塔'],
-    theLostCityOfAmdapor:               ['The Lost City Of Amdapor', 'Historisches Amdapor', 'Les Vestiges De La Cité D\'Amdapor', '神聖遺跡 古アムダプール市街'],
-    theLostCityOfAmdaporHard:           ['The Lost City Of Amdapor (Hard)', 'Historisches Amdapor (schwer)', 'Les Vestiges De La Cité D\'Amdapor (brutal)', '神聖遺跡 古アムダプール市街 (Hard)'],
-    theLabyrinthOfTheAncients:          ['The Labyrinth Of The Ancients', 'Kristallturm - Das Labyrinth Der Alten', 'La Tour De Cristal - Dédale Antique', 'クリスタルタワー：古代の民の迷宮'],
-    syrcusTower:                        ['Syrcus Tower', 'Kristallturm - Der Syrcus-Turm', 'La Tour De Cristal - Tour De Syrcus', 'クリスタルタワー：シルクスの塔'],
-    theWorldOfDarkness:                 ['The World Of Darkness', 'Die Welt Der Dunkelheit', 'La Tour De Cristal - Monde Des Ténèbres', 'クリスタルタワー：闇の世界'],
+    sastasha: [
+      'Sastasha',
+      true,
+      true,
+      '逆襲要害 サスタシャ浸食洞'
+    ],
+    sastashaHard: [
+      'Sastasha (Hard)',
+      'Sastasha (schwer)',
+      'Sastasha (brutal)',
+      '逆襲要害 サスタシャ浸食洞 (Hard)'
+    ],
+    tamtara: [
+      'The Tam-Tara Deepcroft',
+      'Totenacker Tam-Tara',
+      'L\'Hypogée De Tam-Tara',
+      '惨劇霊殿 タムタラの墓所'
+    ],
+    tamtaraHard: [
+      'The Tam-Tara Deepcroft (Hard)',
+      'Totenacker Tam-Tara (schwer)',
+      'L\'Hypogée De Tam-Tara (brutal)',
+      '惨劇霊殿 タムタラの墓所 (Hard)'
+    ],
+    copperbellMines: [
+      'Copperbell Mines',
+      'Kupferglocken-Mine',
+      'Les Mines De Clochecuivre',
+      '騒乱坑道 カッパーベル銅山'
+    ],
+    copperbellMinesHard: [
+      'Copperbell Mines (Hard)',
+      'Kupferglocken-Mine (schwer)',
+      'Les Mines De Clochecuivre (brutal)',
+      '騒乱坑道 カッパーベル銅山 (Hard)'
+    ],
+    pharosSirius: [
+      'Pharos Sirius',
+      true,
+      'Le Phare De Sirius',
+      '制圧巨塔 シリウス大灯台'
+    ],
+    pharosSiriusHard: [
+      'Pharos Sirius (Hard)',
+      'Pharos Sirius (schwer)',
+      'Le Phare De Sirius (brutal)',
+      '制圧巨塔 シリウス大灯台 (Hard)'
+    ],
+    theAetherochemicalResearchFacility: [
+      'The Aetherochemical Research Facility',
+      'Ätherochemisches Forschungslabor',
+      'Le Laboratoire De Magismologie',
+      '蒼天聖戦 魔科学研究所'
+    ],
+    theAntitower: [
+      'The Antitower',
+      'Antiturm',
+      'L\'Antitour',
+      '星海観測 逆さの塔'
+    ],
+    theLostCityOfAmdapor: [
+      'The Lost City Of Amdapor',
+      'Historisches Amdapor',
+      'Les Vestiges De La Cité D\'Amdapor',
+      '神聖遺跡 古アムダプール市街'
+    ],
+    theLostCityOfAmdaporHard: [
+      'The Lost City Of Amdapor (Hard)',
+      'Historisches Amdapor (schwer)',
+      'Les Vestiges De La Cité D\'Amdapor (brutal)',
+      '神聖遺跡 古アムダプール市街 (Hard)'
+    ],
+    theLabyrinthOfTheAncients: [
+      'The Labyrinth Of The Ancients',
+      'Kristallturm - Das Labyrinth Der Alten',
+      'La Tour De Cristal - Dédale Antique',
+      'クリスタルタワー：古代の民の迷宮'
+    ],
+    syrcusTower: [
+      'Syrcus Tower',
+      'Kristallturm - Der Syrcus-Turm',
+      'La Tour De Cristal - Tour De Syrcus',
+      'クリスタルタワー：シルクスの塔'
+    ],
+    theWorldOfDarkness: [
+      'The World Of Darkness',
+      'Die Welt Der Dunkelheit',
+      'La Tour De Cristal - Monde Des Ténèbres',
+      'クリスタルタワー：闇の世界'
+    ],
   },
   trial: {
-    ultimasBane:            ['The Minstrel\'s Ballad: Ultima\'s Bane', 'Heldenlied Von Ultima', 'Le Fléau D\'Ultima', '究極幻想 アルテマウェポン破壊作戦'],
-    theBowlOfEmbersExtreme: ['The Bowl Of Embers (Extreme)', 'Zenit Der Götter - Ifrit', 'Le Cratère Des Tisons (extrême)', '極イフリート討滅戦'],
-    theHowlingEyeExtreme:   ['The Howling Eye (Extreme)', '', '', ''],
-    theNavelExtreme:        ['The Navel (Extreme)', '', '', ''],
-    thordansReign:          [],
-    containmentBayS1T7:     [],
-    theBindingCoilT5:       [],
-    theSecondCoilT4:        [],
-    theSecondCoilT4Savage:  [],
-    theFinalCoilT3:         [],
-    theFinalCoilT4:         [],
+    ultimasBane: [
+      'The Minstrel\'s Ballad: Ultima\'s Bane',
+      'Heldenlied Von Ultima',
+      'Le Fléau D\'Ultima',
+      '究極幻想 アルテマウェポン破壊作戦'
+    ],
+    theBowlOfEmbersExtreme: [
+      'The Bowl Of Embers (Extreme)',
+      'Zenit Der Götter - Ifrit',
+      'Le Cratère Des Tisons (extrême)',
+      '極イフリート討滅戦'
+    ],
+    theHowlingEyeExtreme: [
+      'The Howling Eye (Extreme)',
+      'Zenit Der Götter - Garuda',
+      'Hurlœil (extrême)',
+      '極ガルーダ討滅戦'
+    ],
+    theNavelExtreme: [
+      'The Navel (Extreme)',
+      'Zenit Der Götter - Titan',
+      'Le Nombril (extrême)',
+      '極タイタン討滅戦'
+    ],
+    thordansReign: [
+      'The Minstrel\'s Ballad: Thordan\'s Reign',
+      'Heldenlied Von Thordans Fall',
+      'Le Règne De Thordan',
+      '蒼天幻想 ナイツ・オブ・ラウンド討滅戦'
+    ],
+    containmentBayS1T7: [
+      'Containment Bay S1T7 (Extreme)',
+      'Zenit Der Götter - Sephirot',
+      'Unité De Contention S1P7 (extrême)',
+      '極魔神セフィロト討滅戦'
+    ],
+    containmentBayP1T6: [
+      'Containment Bay P1T6 (Extreme)',
+      'Zenit Der Götter - Sophia',
+      'Unité De Contention P1P6 (extrême)',
+      '極女神ソフィア討滅戦',
+    ],
+    containmentBayZ1T9: [
+      'Containment Bay Z1T9 (Extreme)',
+      'Zenit Der Götter - Zurvan',
+      'Unité De Contention Z1P9 (extrême)',
+      '極鬼神ズルワーン討滅戦'
+    ],
+    theBindingCoilT5: [],
+    theSecondCoilT4: [],
+    theSecondCoilT4Savage: [],
+    theFinalCoilT3: [],
+    theFinalCoilT4: [],
   }
 }
 
