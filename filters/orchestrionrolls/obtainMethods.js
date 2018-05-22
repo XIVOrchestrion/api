@@ -368,8 +368,10 @@ module.exports = (song, achievement) => {
 
   const thisMethod = methods[song.id] || null
 
-  if (!thisMethod)
-    console.warn(`No method could be found for Song ${song.id} (${song.name_en}). Please check methods and try again.`)
+  if (!thisMethod) {
+    let songName = song.name_en.replace(' Orchestrion Roll', '')
+    console.warn(`No method could be found for Song ${song.id} (${songName}). Please check methods and try again.`)
+  }
 
   return thisMethod
 }
