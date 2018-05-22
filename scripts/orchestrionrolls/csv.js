@@ -25,32 +25,40 @@ module.exports = new CsvHelper(name, plural, {
     const itemAction  = data[2].slice(2)
 
     const filteredItems = itemAction.filter(item => {
-      if (item['Type'] === itemType)
-       return true
+      if (item['Type'] === itemType) {
+        // console.log(item)
+        return true
+     }
 
       return false
     }).map(item => {
-      return item['#']
+      return item
     })
 
     const map = new Map()
 
     filteredItems.forEach((item, k) => {
+      let itemActionKey = item['#']
+      let itemID = item['Data[0]']
+      let itemIDKey = itemID - 1
       const obj = {
-        id:       item['Data[0]'],
-        name:     orchestrion[k].name,
-        help:     orchestrion[k].description,
-        category: uiParam[k].category,
-        order:    uiParam[k].order
+        id:       itemID,
+        name:     orchestrion[itemIDKey].name,
+        help:     orchestrion[itemIDKey].description,
+        category: uiParam[itemIDKey].category,
+        order:    uiParam[itemIDKey].order
       }
-      map.set(item, obj)
+      map.set(itemActionKey, obj)
     })
+
 
     function strMapToObj(strMap) {
       let obj = Object.create(null)
       for (let [k,v] of strMap) {
         obj[k] = v
       }
+
+      console.log(obj)
 
       return obj
     }
