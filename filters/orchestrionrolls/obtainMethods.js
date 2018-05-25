@@ -95,6 +95,17 @@ const helper = {
       false,
     )
   },
+  duty: (name, level) => {
+    return o(
+      'duty',
+      [
+        name,
+        level
+      ],
+      true,
+      false,
+    )
+  },
   crafted: (level, stars, specialist, materials) => {
     return o(
       'craft',
@@ -364,6 +375,23 @@ module.exports = (song, achievement) => {
 
     22485: helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant),
     22488: helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant),
+
+    23321: helper.duty(locales.duty.theLostCityOfAmdaporHard, 50),
+    23322: helper.duty(locales.duty.domaCastle, 67),
+    23323: helper.duty(locales.duty.theSwallowsCompass, 70),
+
+    23328: helper.duty(locales.duty.theRidoranaLighthouse, 70),
+    23329: helper.duty(locales.duty.theRidoranaLighthouse, 70),
+    23330: helper.duty(locales.duty.theRidoranaLighthouse, 70),
+
+    23331: [
+      helper.fadedTrial(locales.trial.tsukuyomisPain, 70),
+      helper.crafted(70, 3, false)
+    ],
+    23332: [
+      helper.fadedTrial(locales.trial.tsukuyomisPain, 70),
+      helper.crafted(70, 3, false)
+    ]
   }
 
   const thisMethod = methods[song.id] || null
