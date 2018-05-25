@@ -31,6 +31,14 @@ module.exports = {
     jp: true,
     name: { en: 'Seasonal Quest', de: 'Saisonale Suche', fr: 'Quête Saisonnière', jp: '季節のクエスト' },
   },
+  duty: {
+    // Awarded randomly from the final chest in the duty 'Pharos Sirius (Normal/Hard)' (lv. 50/60).
+    de: true,
+    en: 'Awarded randomly from the final chest in the duty \'{0}\' (lv. {1}).',
+    fr: true,
+    jp: true,
+    name: { en: 'Duty Completion', de: true, fr: true, jp: true },
+  },
   craft: {
     // Crafted from a lv. 70 *** Alchemist recipe. Specialist required. __recipe__
     de: true,

@@ -231,6 +231,24 @@ const locales = {
       'La Tour De Cristal - Monde Des Ténèbres',
       'クリスタルタワー：闇の世界'
     ],
+    domaCastle: [
+      'Doma Castle',
+      'Burg Doma',
+      'Le Château De Doma',
+      '解放決戦 ドマ城'
+    ],
+    theRidoranaLighthouse: [
+      'The Ridorana Lighthouse',
+      'Richtfeuer Von Ridorana',
+      'Le Phare De Ridorana',
+      '封じられた聖塔 リドルアナ'
+    ],
+    theSwallowsCompass: [
+      'The Swallow\'s Compass',
+      'Kompass Der Schwalbe',
+      'Le Compas De L\'Hirondelle',
+      '風水霊殿 ガンエン廟'
+    ],
   },
   trial: {
     ultimasBane: [
@@ -280,6 +298,24 @@ const locales = {
       'Zenit Der Götter - Zurvan',
       'Unité De Contention Z1P9 (extrême)',
       '極鬼神ズルワーン討滅戦'
+    ],
+    shinryusDomain: [
+      'The Minstrel\'s Ballad: Shinryu\'s Domain',
+      'Heldenlied Von Shinryu',
+      'Le Domaine De Shinryu',
+      '極神龍討滅戦'
+    ],
+    theJadeStoa: [
+      'The Jade Stoa (Extreme)',
+      'Seelensturm - Byakko',
+      'La Clairière De Jade (extrême)',
+      '極白虎征魂戦'
+    ],
+    tsukuyomisPain: [
+      'The Minstrel\'s Ballad: Tsukuyomi\'s Pain',
+      'Zenit Der Götter - Tsukuyomi',
+      'Castrum Fluminis (extrême)',
+      '極ツクヨミ討滅戦'
     ],
     theBindingCoilT5: [],
     theSecondCoilT4: [],
