@@ -135,9 +135,9 @@ module.exports = {
     name: { en: 'Faded material from Exploratory Missions', de: true, fr: true, jp: true },
   },
   fadedHunt: {
-    // Faded material randomly obtained from A Rank Hunts in The Dravanian Forelands.
+    // Faded material randomly obtained from A Rank Hunts or higher in The Dravanian Forelands.
     de: true,
-    en: 'Faded material randomly obtained from {0} Rank Hunts in {1}.',
+    en: 'Faded material randomly obtained from {0} Rank Hunts or higher in {1}.',
     fr: true,
     jp: true,
     name: { en: 'Faded material from Hunts', de: true, fr: true, jp: true },
@@ -149,6 +149,14 @@ module.exports = {
     fr: true,
     jp: true,
     name: { en: 'Faded material from purchase', de: true, fr: true, jp: true },
+  },
+  fadedRaid: {
+    // Faded material randomly obtained from the final chest in the duty 'Pharos Sirius (Normal/Hard)' (lv. 50/60).
+    de: true,
+    en: 'Faded material randomly obtained from the final chest in the raid \'{0}\' (lv. {1}).',
+    fr: true,
+    jp: true,
+    name: { en: 'Faded material from Raids', de: true, fr: true, jp: true },
   },
   fadedTreasureMap: {
     // Faded material randomly obtained from Treasure Maps.
