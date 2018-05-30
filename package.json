@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "Mock API for FadedCopy",
   "private": true,
-  "main": "update.js",
   "keywords": [
     "javascript"
   ],
   "author": "Liam Morgan",
   "license": "MIT",
+  "main": "index.js",
+  "directories": {
+    "docs": "./docs"
+  },
   "dependencies": {
     "file-system": "^2.2.2",
     "node-fetch": "^2.0.0",
