@@ -11,6 +11,9 @@ const path = require('path')
 const updatePatches = require('./scripts/library/patchList')
 const updateCurrency = require('./scripts/library/currency')
 const updateShops = require('./scripts/library/shops')
+const updatePlaceNames = require('./scripts/library/placeNames')
+const updateNpcResidents = require('./scripts/library/npcResidents')
+const updateOrchestrionRolls = require('./scripts/library/orchestrionRolls')
 
 
 global.appRoot = path.resolve(__dirname)
@@ -25,15 +28,18 @@ const api = async function(args) {
   // Library updating
   if (!config) {
 
-    if ( await updatePatches.print() ) {
-      return console.log('will run updates')
-      //updateCurrency.print()
-      //updateShops.print()
-      return
-    }
+    updateOrchestrionRolls.fetch()
+    // updatePatches.fetch()
+    // updateNpcResidents.fetch()
+    // updatePlaceNames.fetch()
 
-    console.log('skipping updates')
-    return
+    // if( await updatePatches.patches() ) {
+    //   console.log('will update')
+    //   return
+    // }
+    //
+    // console.log('no change')
+    // return
   }
 }
 
