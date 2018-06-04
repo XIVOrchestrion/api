@@ -1,15 +1,14 @@
-const fs = require('fs')
-const LIBRARY = require('../helpers/library')
+const { destLibra } = require ('../_consts')
+const libraryFile = require('../helpers/libraryFile')
 
 
-module.exports = new LIBRARY ('Patch List', 'Patches', {
-  dest: 'library',
+module.exports = new libraryFile ('Patch List', 'Patches', {
+  dest: destLibra,
   fileName: 'patches',
-  files: [
-    {
-      name: 'Patch List',
-      url: 'patchlist'
-    }
-  ],
-  checkLibVer: true
+  file: {
+    url: 'patchlist',
+    pagination: false,
+  },
+  checkLibVer: true,
+  format: (data) => data,
 })

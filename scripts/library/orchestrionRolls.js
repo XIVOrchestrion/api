@@ -1,9 +1,10 @@
+const { destLibra, destLibraMusic } = require ('../_consts')
 const libraryFile = require('../helpers/libraryFile')
 const recursiveFetch = require('../helpers/recursiveFetch')
 
 
 module.exports = new libraryFile ('Orchestrion Item References', 'Orchestrion Item References', {
-  dest: 'library',
+  dest: destLibraMusic,
   fileName: 'orchestrionItems',
   file: {
     url: 'Item',

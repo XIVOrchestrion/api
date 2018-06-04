@@ -1,44 +1,42 @@
+const { destLibra } = require ('../_consts')
 const libraryFile = require('../helpers/libraryFile')
 
 
 module.exports = new libraryFile ('NPC Residents', 'NPC Residents', {
-  dest: 'library',
+  dest: destLibra,
   fileName: 'npcResidents',
   file: {
     url: 'ENpcResident',
     columns: [
       'ID',
-      'Name_en',
-      'Name_de',
-      'Name_fr',
-      'Name_ja',
-      'Base.ENpcData_0',
-      'Base.ENpcData_1',
-      'Base.ENpcData_2',
-      'Base.ENpcData_3',
-      'Base.ENpcData_5',
-      'Base.ENpcData_6',
-      'Base.ENpcData_7',
-      'Base.ENpcData_8',
-      'Base.ENpcData_9',
-      'Base.ENpcData_10',
-      'Base.ENpcData_11',
-      'Base.ENpcData_12',
-      'Base.ENpcData_13',
-      'Base.ENpcData_14',
-      'Base.ENpcData_15'
+      'Base.ENpcData0',
+      'Base.ENpcData1',
+      'Base.ENpcData2',
+      'Base.ENpcData3',
+      'Base.ENpcData5',
+      'Base.ENpcData6',
+      'Base.ENpcData7',
+      'Base.ENpcData8',
+      'Base.ENpcData9',
+      'Base.ENpcData10',
+      'Base.ENpcData11',
+      'Base.ENpcData12',
+      'Base.ENpcData13',
+      'Base.ENpcData14',
+      'Base.ENpcData15'
     ],
-    pagination: true,
   },
+  pagination: true,
   format: (data) => {
+
     const result = {}
     data.forEach((entry, i) => {
-      if(entry['Base.ENpcData_0'] === 0)
+      if(entry['Base.ENpcData0'] === 0)
         return
 
       const shopVals = []
       Object.entries(entry).forEach(key => {
-        if (key[0].includes('Base.ENpcData_') && key[1] !== 0)
+        if (key[0].includes('Base.ENpcData') && key[1] !== 0)
           return shopVals.push(key[1])
 
         return
@@ -48,12 +46,6 @@ module.exports = new libraryFile ('NPC Residents', 'NPC Residents', {
 
       result[entry.ID] = {
         id: entry.ID,
-        name: {
-          en: entry.Name_en,
-          de: nameCheck(entry.Name_de),
-          fr: nameCheck(entry.Name_fr),
-          ja: nameCheck(entry.Name_ja),
-        },
         shopVals: shopVals,
       }
     })

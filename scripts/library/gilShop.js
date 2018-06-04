@@ -4,13 +4,15 @@ const libraryFile = require('../helpers/libraryFile')
 
 module.exports = new libraryFile ('gilShop', 'gil', {
   dest: 'library',
-  fileName: 'currency',
+  fileName: 'gilShop',
   file: {
-    name: 'Currency',
-    url: 'Currency',
-    columns: ['Item.ID', 'Item.Name_en', 'Item.Name_de', 'Item.Name_fr', 'Item.Name_ja', 'Item.Icon'],
+    name: 'Gil Shops',
+    url: 'GilShop',
+    columns: ['ID', 'Name_en', 'Name_de', 'Name_fr', 'Name_ja'],
   },
   format: (data) => {
+    return {
 
+    }
   },
 })
