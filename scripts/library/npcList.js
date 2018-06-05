@@ -3,7 +3,7 @@ const { destLibra, destLibraMusic } = require ('../_consts')
 const recursiveFetch = require('../helpers/recursiveFetch')
 
 
-async function func() {
+module.exports = async function() {
   await getConnections()
     .then(data => compareNpcs(data))
     .then(res => fetchData(res))
@@ -16,39 +16,38 @@ async function func() {
  * @returns {Array}
  */
 async function getConnections() {
-  const connections = []
+  let connections = []
   const links = {}
 
-  fs.readdirSync(destLibraMusic, 'utf8').forEach(file => {
+  fs.readdirSync(destLibraMusic, 'utf-8').forEach(file => {
     const dest = `${destLibraMusic}/${file}`
-    const data = JSON.parse( fs.readFileSync(dest, 'utf8') )
-    if (!data.connections)
+    const data = JSON.parse( fs.readFileSync(dest, 'utf-8') )
+
+    if (!data.GameContentLinks.GilShopItem && !data.GameContentLinks.SpecialShop)
       return
 
-    links[data.ID] = {}
+    Object.keys(data.GameContentLinks).forEach(key => {
 
-    Object.keys(data.connections).forEach(key => {
+      if (data.GameContentLinks[key].length === 0)
+        return
 
-      const linkArray = []
-      Object.values(data.connections[key]).forEach(item => {
-        linkArray.push({ type: key, value: item })
+      Object.values(data.GameContentLinks[key]).forEach(array => {
 
-        if (key === 'GilShopItem')
-          item = Math.floor(item.toString().split('.')[0])
+        array.forEach(item => {
+          if (item % 1 != 0)
+            item = Math.floor(item.toString().split('.')[0])
 
-        if (connections.includes(item))
-          return
 
-        connections.push(item)
+          links[item] ? links[item].song.push(data.ID) : links[item] = { song: [data.ID], npc: '' }
+          connections.push(item)
+        })
       })
-
-      links[data.ID] = { methods: linkArray }
     })
   })
 
-  console.log(links)
+  const res = [...new Set(connections)].sort()
 
-  return connections
+  return [res, links]
 }
 
 
@@ -63,22 +62,49 @@ function compareNpcs(data) {
 
   const npcList = []
   const dest = `${destLibra}/npcResidents.json`
-  const fileData = JSON.parse( fs.readFileSync(dest, 'utf8') )
+  const fileData = JSON.parse( fs.readFileSync(dest, 'utf-8') )
+  const dataKeys = data[0]
+  const linksMap = data[1]
+  const npcKeys = Object.keys(fileData).map((npc, i) => Math.floor(npc))
 
-  Object.keys(fileData).forEach((npc, i) => {
-    npc = Math.floor(npc)
-    const shopVals = Array.isArray(fileData[npc].shopVals) ? fileData[npc].shopVals : [fileData[npc].shopVals]
-    data.forEach(item => {
-      if (npcList.includes(npc))
+  npcKeys.forEach(npc => {
+
+    dataKeys.forEach(item => {
+      if (!fileData[npc].values.includes(item))
         return
 
-      shopVals.includes(item) ? npcList.push(npc) : null
+      linksMap[item].npc = npc
+
+      !npcList.includes(npc) ? npcList.push(npc) : null
     })
   })
 
-  fs.writeFileSync(`${destLibra}/npcList.json`, npcList, 'utf8')
+  writeMap(linksMap)
 
   return npcList
+}
+
+
+/**
+ * Write out the data map
+ *
+ * @param {Object} data - Data 
+ */
+function writeMap(data) {
+  const dest = `${destLibra}/npcMap.json`
+
+  if (fs.existsSync(dest)) {
+    const existingData = fs.readFileSync(dest, 'utf-8')
+
+    if (existingData === JSON.stringify(data))
+      return console.log(`${dest} unchanged.`)
+
+    fs.writeFileSync(dest, JSON.stringify(data), 'utf-8')
+    return console.log(`${dest} updated.`)
+  }
+
+  fs.writeFileSync(`${destLibra}/npcMap.json`, JSON.stringify(data), 'utf-8')
+  return console.log(`${dest} created.`)
 }
 
 
@@ -100,6 +126,3 @@ function fetchData(data) {
     }
   })
 }
-
-
-module.exports = func()
