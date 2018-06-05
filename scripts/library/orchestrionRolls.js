@@ -15,7 +15,6 @@ module.exports = new libraryFile ('Orchestrion Item References', 'Orchestrion It
       'ItemAction.Type'
     ],
   },
-  pagination: true,
   format: (data, args) => {
     const filtered = data.filter(entry => entry['ItemAction.Type'] === 5845)
     console.log(filtered)
@@ -28,8 +27,9 @@ module.exports = new libraryFile ('Orchestrion Item References', 'Orchestrion It
       }
     })
   },
+  list: true,
   useCallback: true,
-}, (data, args) => {
+}, (data, args, resolve) => {
   const filtered = data.filter(entry => entry['ItemAction.Type'] === 5845)
 
   recursiveFetch(filtered, 'Orchestrion Roll', (entry, all) => {
@@ -41,5 +41,5 @@ module.exports = new libraryFile ('Orchestrion Item References', 'Orchestrion It
       },
       format: (data, args) => data,
     }
-  })
+  }, resolve)
 })

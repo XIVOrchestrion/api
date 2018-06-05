@@ -14,7 +14,7 @@ module.exports = new libraryFile ('NPC Residents', 'NPC Residents', {
       'Quests',
     ],
   },
-  pagination: true,
+  list: true,
   format: (data) => {
 
     const result = {}
@@ -29,5 +29,5 @@ module.exports = new libraryFile ('NPC Residents', 'NPC Residents', {
     })
 
     return result
-  },
+  }
 })

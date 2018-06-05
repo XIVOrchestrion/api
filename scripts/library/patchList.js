@@ -6,8 +6,7 @@ module.exports = new libraryFile ('Patch List', 'Patches', {
   dest: destLibra,
   fileName: 'patches',
   file: {
-    url: 'patchlist',
-    pagination: false,
+    url: 'PatchList',
   },
   checkLibVer: true,
   format: (data) => data,
