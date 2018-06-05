@@ -21,7 +21,7 @@ module.exports = class Library {
     this.file = config.file
     this.fileName = config.fileName
     this.format = config.format
-    this.pagination = config.pagination
+    this.list = config.list
 
     this.callback = callback
     this.useCallback = config.useCallback
@@ -31,15 +31,50 @@ module.exports = class Library {
   }
 
 
-  async fetch() {
+  async fetch(resolve, reject) {
     this.args = arguments
+    this.resolve = resolve
+    this.reject = reject
 
     let apiColumns = this.file.columns ? `&columns=${this.file.columns.join(',')}` : ''
     let apiPath = `https://api.xivdb-staging.com/${this.file.url}`
 
-    callApi.call(this, apiPath, apiColumns)
+    if (!this.list)
+      return callApi.call(this, apiPath, apiColumns, processData.bind(this))
+
+    recursiveCallApi.call(this, apiPath, apiColumns)
       .then(data => processData.call(this, data))
   }
+}
+
+
+
+
+/**
+ * Fetch a single item from XIVDB Api
+ *
+ * @param {string} api - API URL to fetch from
+ * @param {string} columns - Columns to narrow down fetched data
+ * @param {function} callback - Function to execute after fetch completes
+ */
+function callApi(api, columns, callback) {
+  const apiPath = `${api}?${columns}`
+  const config = {
+    method: 'GET',
+    mode: 'cors',
+  }
+
+  fetch(apiPath, config)
+    .then(response => response.json())
+    .then(callback)
+    .catch(e => {
+      if(this.errors === 10)
+        throw new Error(`XIVDB API Error: ${e}`)
+
+      ++this.errors
+      console.info(`API retry attempt ${this.errors}`)
+      callApi.call( this, api, columns, callback )
+    })
 }
 
 
@@ -53,12 +88,13 @@ module.exports = class Library {
  * @param {Array} result - Data results from API
  * @param {Number} page - Page to start call from
  */
-async function callApi(api, columns, result = [], page = 1) {
+async function recursiveCallApi(api, columns, result = [], page = 1) {
   const apiKey = await fs.readFileSync('./xivdb-api-key.txt', 'utf-8')
+
   if (!apiKey)
     throw new Error('XIVDB API Key is required.')
 
-  const apiPage = this.pagination && page > 1 ? `&page=${page}` : ''
+  const apiPage = page > 1 ? `&page=${page}` : ''
   const apiPath = `${api}?key=${apiKey}${columns}${apiPage}`
   const config = {
     method: 'GET',
@@ -73,20 +109,15 @@ async function callApi(api, columns, result = [], page = 1) {
 
       ++this.errors
       console.info(`API retry attempt ${this.errors}`)
-      callApi.call( this, api, columns, result, page)
+      recursiveCallApi.call( this, api, columns, result, page )
     })
 
-  if (this.pagination && data.pagination) {
-    console.log(`Fetched page ${page}/${data.pagination.page_total} from ${api}`)
-    result = [...result, ...data.results]
+  result = [...result, ...data.results]
 
-    if (data.pagination.page_next)
-      return callApi.call( this, api, columns, result, data.pagination.page_next)
+  if (data.pagination.page_next)
+    return recursiveCallApi.call( this, api, columns, result, data.pagination.page_next )
 
-    return result
-  }
-
-  return data
+  return result
 }
 
 
@@ -95,7 +126,7 @@ async function callApi(api, columns, result = [], page = 1) {
 /**
  * Handling fetched data
  *
- * @param {Array} data - Data fetched from callApi()
+ * @param {Array} data - Data fetched from recursiveCallApi()
  */
 function processData(data) {
 
@@ -157,11 +188,15 @@ function compareJSON(data) {
       return ((data, fileName, logMessage) => {
         fs.readFile(filePath, 'utf8', (e, fileData) => {
 
+          // Handle reject is data is unchanged
+          if (fileData === JSON.stringify(data) && this.reject)
+            return this.reject('Library is up-to-date.')
+
+          // Handle callbacks or resolve if data is unchanged
           if (fileData === JSON.stringify(data))
             return resolve.call(this, data, logMessage += 'unchanged.')
 
           logMessage += 'updated.'
-
           createJSON.call(this, fileDest, filePath, data, logMessage)
         })
       })(data, fileName, logMessage)
@@ -196,6 +231,8 @@ function createJSON(dest, filePath, data, logMessage) {
 
       return this.callback()
     }
+
+    this.resolve()
   })
 }
 
@@ -216,11 +253,14 @@ function resolve(data, logMessage) {
     if (logMessage)
       console.log(logMessage)
 
-    return this.callback(data, this.args)
+    return this.callback(data, this.args, this.resolve)
   }
 
   if (logMessage)
-    return console.log(logMessage)
+    console.log(logMessage)
+
+  if (this.resolve)
+    return this.resolve()
 
   throw new Error("Resolve should not have been called.")
 }
