@@ -1,13 +1,13 @@
 const libraryFile = require('./libraryFile')
 
 
-module.exports = function(data, name, getConfig) {
+module.exports = function(data, name, getConfig, resolve) {
   const all = data.slice(0)
   recursiveFetch(all, ...arguments)
 }
 
 
-function recursiveFetch(all, data, name, getConfig) {
+function recursiveFetch(all, data, name, getConfig, resolve) {
   const entry = data.shift()
   new libraryFile (
     `${name} ${entry.ID ? entry.ID : entry}`,
@@ -17,7 +17,10 @@ function recursiveFetch(all, data, name, getConfig) {
       if (data.length)
         return recursiveFetch(...arguments)
 
-      return true
+      if (resolve)
+        return resolve()
+
+      return
     }
   ).fetch()
 }
