@@ -88,7 +88,7 @@ function compareNpcs(data) {
 /**
  * Write out the data map
  *
- * @param {Object} data - Data 
+ * @param {Object} data
  */
 function writeMap(data) {
   const dest = `${destLibra}/npcMap.json`
