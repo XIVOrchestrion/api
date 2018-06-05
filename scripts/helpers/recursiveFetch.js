@@ -10,14 +10,14 @@ module.exports = function(data, name, getConfig) {
 function recursiveFetch(all, data, name, getConfig) {
   const entry = data.shift()
   new libraryFile (
-    `${name} ${entry.ID}`,
+    `${name} ${entry.ID ? entry.ID : entry}`,
     name,
     getConfig(entry, all),
     () => {
       if (data.length)
         return recursiveFetch(...arguments)
 
-      return
+      return true
     }
   ).fetch()
 }
