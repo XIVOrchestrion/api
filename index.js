@@ -15,6 +15,9 @@ const updatePlaceNames = require('./scripts/library/placeNames')
 const updateNpcResidents = require('./scripts/library/npcResidents')
 const updateOrchestrionRolls = require('./scripts/library/orchestrionRolls')
 
+const buildNpcList = require('./scripts/library/npcList')
+
+
 
 global.appRoot = path.resolve(__dirname)
 
@@ -26,11 +29,26 @@ const api = async function(args) {
 
 
   // Library updating
-  if (!config) {
+  if (!config || config.libra) {
+    const progress = {
+      patches: false,
+      orchestrionRolls: false,
+      npcResidents: false,
+    }
 
-    updateOrchestrionRolls.fetch()
     // updatePatches.fetch()
+    // updateOrchestrionRolls.fetch()
     // updateNpcResidents.fetch()
+
+
+      await updateOrchestrionRolls.fetch()
+        .then(() => console.log('fire'))
+
+
+    // await updateNpcResidents.fetch()
+
+    // buildNpcList()
+
     // updatePlaceNames.fetch()
 
     // if( await updatePatches.patches() ) {
