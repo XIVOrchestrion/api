@@ -36,18 +36,14 @@ const api = async function(args) {
       npcResidents: false,
     }
 
-    // updatePatches.fetch()
-    // updateOrchestrionRolls.fetch()
-    // updateNpcResidents.fetch()
+    await new Promise((resolve, reject) => updatePatches.fetch(resolve, reject))
+      .then(() => new Promise( resolve => updateOrchestrionRolls.fetch(resolve) ))
+      .then(() => new Promise( resolve => updateNpcResidents.fetch(resolve) ))
+      .then(() => buildNpcList())
+      .catch(e => console.warn(e))
 
 
-      await updateOrchestrionRolls.fetch()
-        .then(() => console.log('fire'))
 
-
-    // await updateNpcResidents.fetch()
-
-    // buildNpcList()
 
     // updatePlaceNames.fetch()
 
