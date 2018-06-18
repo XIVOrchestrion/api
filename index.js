@@ -10,12 +10,15 @@ const path = require('path')
 
 const updatePatches = require('./scripts/library/patchList')
 const updateCurrency = require('./scripts/library/currency')
-const updateShops = require('./scripts/library/shops')
+const updateGilShops = require('./scripts/library/gilShop')
 const updatePlaceNames = require('./scripts/library/placeNames')
 const updateNpcResidents = require('./scripts/library/npcResidents')
 const updateOrchestrionRolls = require('./scripts/library/orchestrionRolls')
+const updateOrchestrionUi = require('./scripts/library/orchestrionUi')
 
 const buildNpcList = require('./scripts/library/npcList')
+
+const buildOrchestrionRolls = require('./scripts/orchestrionRolls/orchestrionRolls')
 
 
 
@@ -30,30 +33,22 @@ const api = async function(args) {
 
   // Library updating
   if (!config || config.libra) {
-    const progress = {
-      patches: false,
-      orchestrionRolls: false,
-      npcResidents: false,
-    }
 
-    await new Promise((resolve, reject) => updatePatches.fetch(resolve, reject))
-      .then(() => new Promise( resolve => updateOrchestrionRolls.fetch(resolve) ))
-      .then(() => new Promise( resolve => updateNpcResidents.fetch(resolve) ))
+    await new Promise((resolve, reject) => updatePatches.fetch(resolve))
+      .then(() => new Promise( resolve => updateGilShops.fetch(resolve) ))
+      .then(() => new Promise( resolve => updateOrchestrionUi.fetch(resolve) ))
+      // .then(() => new Promise( resolve => updateOrchestrionRolls.fetch(resolve) ))
+      // .then(() => new Promise( resolve => updateNpcResidents.fetch(resolve) ))
       .then(() => buildNpcList())
       .catch(e => console.warn(e))
 
-
-
-
     // updatePlaceNames.fetch()
+  }
 
-    // if( await updatePatches.patches() ) {
-    //   console.log('will update')
-    //   return
-    // }
-    //
-    // console.log('no change')
-    // return
+  if (!config | config.build) {
+    if (fs.existsSync('./library/orchestrion', 'utf8'))
+      buildOrchestrionRolls('./library/orchestrion')
+
   }
 }
 
