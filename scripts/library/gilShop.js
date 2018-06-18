@@ -2,17 +2,16 @@ const { destLibra } = require ('../_consts')
 const libraryFile = require('../helpers/libraryFile')
 
 
-module.exports = new libraryFile ('gilShop', 'gil', {
-  dest: 'library',
+module.exports = new libraryFile ('Gil Shops', 'Gil Shops', {
+  dest: destLibra,
   fileName: 'gilShop',
   file: {
-    name: 'Gil Shops',
     url: 'GilShop',
-    columns: ['ID', 'Name_en', 'Name_de', 'Name_fr', 'Name_ja'],
+    columns: ['ID'],
   },
+  list: true,
   format: (data) => {
-    return {
-
-    }
+    const response = data.map(item => item.ID)
+    return response
   },
 })

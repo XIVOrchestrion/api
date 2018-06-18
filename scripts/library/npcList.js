@@ -2,11 +2,13 @@ const fs = require('fs')
 const { destLibra, destLibraMusic } = require ('../_consts')
 const recursiveFetch = require('../helpers/recursiveFetch')
 
+const gilShops = JSON.parse(fs.readFileSync('./library/gilShop.json', 'utf8'))
+
 
 module.exports = async function() {
   await getConnections()
     .then(data => compareNpcs(data))
-    .then(res => fetchData(res))
+    .then(res => fetchData(res, 'NPC', './library/npcs', 'ENpcResident'))
 }
 
 
@@ -61,6 +63,7 @@ async function getConnections() {
 function compareNpcs(data) {
 
   const npcList = []
+  const shopsToFetch = []
   const dest = `${destLibra}/npcResidents.json`
   const fileData = JSON.parse( fs.readFileSync(dest, 'utf-8') )
   const dataKeys = data[0]
@@ -80,6 +83,10 @@ function compareNpcs(data) {
   })
 
   writeMap(linksMap)
+
+  Object.keys(linksMap).forEach(key => shopsToFetch.push(Math.floor(key)))
+  const gilShopsFetching = shopsToFetch.filter(id => gilShops.includes(id))
+  fetchData(gilShopsFetching, 'Gil Shop', './library/shops', 'GilShop')
 
   return npcList
 }
@@ -112,15 +119,18 @@ function writeMap(data) {
  * Recursively fetch NPC data for library
  *
  * @param {Array} data - NPC IDs to fetch
+ * @param {string} name
+ * @param {string} dest
+ * @param {string} url
  */
-function fetchData(data) {
+function fetchData(data, name, dest, url) {
 
-  recursiveFetch(data, 'NPC', (entry, all) => {
+  recursiveFetch(data, name, (entry, all) => {
     return {
-      dest: './library/npcs',
+      dest: dest,
       fileName: entry,
       file: {
-        url: `ENpcResident/${entry}`,
+        url: `${url}/${entry}`,
       },
       format: (data, args) => data,
     }
