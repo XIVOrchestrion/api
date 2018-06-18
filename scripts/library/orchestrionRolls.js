@@ -4,7 +4,7 @@ const recursiveFetch = require('../helpers/recursiveFetch')
 
 
 module.exports = new libraryFile ('Orchestrion Item References', 'Orchestrion Item References', {
-  dest: destLibraMusic,
+  dest: destLibra,
   fileName: 'orchestrionItems',
   file: {
     url: 'Item',
@@ -34,7 +34,7 @@ module.exports = new libraryFile ('Orchestrion Item References', 'Orchestrion It
 
   recursiveFetch(filtered, 'Orchestrion Roll', (entry, all) => {
     return {
-      dest: 'library/orchestrion',
+      dest: destLibraMusic,
       fileName: entry.ID,
       file: {
         url: `Item/${entry.ID}`,
