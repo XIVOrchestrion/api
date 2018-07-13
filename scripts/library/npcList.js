@@ -1,6 +1,7 @@
 const fs = require('fs')
 const { destLibra, destLibraMusic } = require ('../_consts')
 const recursiveFetch = require('../helpers/recursiveFetch')
+const writeMap = require('../helpers/writeMap')
 
 const gilShops = JSON.parse(fs.readFileSync('./library/gilShop.json', 'utf8'))
 
@@ -25,11 +26,11 @@ async function getConnections() {
     const dest = `${destLibraMusic}/${file}`
     const data = JSON.parse( fs.readFileSync(dest, 'utf-8') )
 
+    // Filter out songs that are not obtained from Gil Shops, Special Shops
     if (!data.GameContentLinks.GilShopItem && !data.GameContentLinks.SpecialShop)
       return
 
     Object.keys(data.GameContentLinks).forEach(key => {
-
       if (data.GameContentLinks[key].length === 0)
         return
 
@@ -82,7 +83,27 @@ function compareNpcs(data) {
     })
   })
 
-  writeMap(linksMap)
+  // Check for empty NPC data in linksMap
+  Object.keys(linksMap).forEach(item => {
+    if (linksMap[item].npc)
+      return
+
+    let npc = npcOverride(item)
+    if (npc === null)
+      return
+
+    linksMap[item].npc = npc
+
+    // Ignore any NPC value that is less than 1000000
+    // (the first ENpcResident), as a workaround for
+    // Chachamun and any other potential Battle NPCs
+    if (npc < 1000000)
+      return
+
+    !npcList.includes(npc) ? npcList.push(npc) : null
+  })
+
+  writeMap(linksMap, destLibra, 'npcMap')
 
   Object.keys(linksMap).forEach(key => shopsToFetch.push(Math.floor(key)))
   const gilShopsFetching = shopsToFetch.filter(id => gilShops.includes(id))
@@ -93,25 +114,31 @@ function compareNpcs(data) {
 
 
 /**
- * Write out the data map
+ * Override empty NPC data to create links
+ * ! Required for certain NPCs with unlinkable data through XIVDB
  *
- * @param {Object} data
+ * @param {Object} linkMapItem - Data to match against and override
  */
-function writeMap(data) {
-  const dest = `${destLibra}/npcMap.json`
-
-  if (fs.existsSync(dest)) {
-    const existingData = fs.readFileSync(dest, 'utf-8')
-
-    if (existingData === JSON.stringify(data))
-      return console.log(`${dest} unchanged.`)
-
-    fs.writeFileSync(dest, JSON.stringify(data), 'utf-8')
-    return console.log(`${dest} updated.`)
+function npcOverride(linkMapItem) {
+  const dataLinks = {
+    // 262406:  '/enemy/1245',
+    262919:  1025763,
+    1769577: 1012225,
+    1769675: 1017338,
+    1769786: 1019450,
+    1769871: 1025848,
   }
 
-  fs.writeFileSync(`${destLibra}/npcMap.json`, JSON.stringify(data), 'utf-8')
-  return console.log(`${dest} created.`)
+  // Special handling for Chachamun
+  if (linkMapItem === '262406') {
+    fetchData([1245], 'NPC', './library/npcs', 'enemy')
+    return 1245
+  }
+
+  if (dataLinks[linkMapItem])
+    return dataLinks[linkMapItem]
+
+  return null
 }
 
 
