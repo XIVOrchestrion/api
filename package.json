@@ -19,7 +19,7 @@
     "request": "^2.83.0"
   },
   "scripts": {
-    "start": "node update",
+    "start": "node index",
     "start:patches": "node update patches",
     "start:music": "node update music",
     "start:musiclist": "node update musicList"
