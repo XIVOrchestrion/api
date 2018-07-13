@@ -22,6 +22,7 @@ module.exports = class Library {
     this.fileName = config.fileName
     this.format = config.format
     this.list = config.list
+    this.max = config.max
 
     this.callback = callback
     this.useCallback = config.useCallback
@@ -95,7 +96,8 @@ async function recursiveCallApi(api, columns, result = [], page = 1) {
     throw new Error('XIVDB API Key is required.')
 
   const apiPage = page > 1 ? `&page=${page}` : ''
-  const apiPath = `${api}?key=${apiKey}${columns}${apiPage}`
+  const apiMax = this.max ? `&max=${this.max}` : ''
+  const apiPath = `${api}?key=${apiKey}${columns}${apiPage}${apiMax}`
   const config = {
     method: 'GET',
     mode: 'cors',
