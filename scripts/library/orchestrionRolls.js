@@ -15,18 +15,6 @@ module.exports = new libraryFile ('Orchestrion Item References', 'Orchestrion It
       'ItemAction.Type'
     ],
   },
-  format: (data, args) => {
-    const filtered = data.filter(entry => entry['ItemAction.Type'] === 5845)
-    console.log(filtered)
-
-    return filtered.map(item => {
-      return {
-        id: item.ID,
-        name: item.Name.replace(' Orchestrion Roll', ''),
-        itemAction: item['ItemAction.ID']
-      }
-    })
-  },
   list: true,
   useCallback: true,
 }, (data, args, resolve) => {
