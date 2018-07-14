@@ -3,10 +3,14 @@ const { destLibra, destLibraMusic } = require ('../_consts')
 const recursiveFetch = require('../helpers/recursiveFetch')
 const writeMap = require('../helpers/writeMap')
 
-const gilShops = JSON.parse(fs.readFileSync('./library/gilShop.json', 'utf8'))
+let gilShops
+let specialShops
 
 
 module.exports = async function() {
+  gilShops = JSON.parse(fs.readFileSync('./library/gilShop.json', 'utf8'))
+  specialShops = JSON.parse(fs.readFileSync('./library/specialShop.json', 'utf8'))
+
   await getConnections()
     .then(data => compareNpcs(data))
     .then(res => fetchData(res, 'NPC', './library/npcs', 'ENpcResident'))
@@ -107,7 +111,9 @@ function compareNpcs(data) {
 
   Object.keys(linksMap).forEach(key => shopsToFetch.push(Math.floor(key)))
   const gilShopsFetching = shopsToFetch.filter(id => gilShops.includes(id))
+  const specialShopsFetching = shopsToFetch.filter(id => specialShops.includes(id))
   fetchData(gilShopsFetching, 'Gil Shop', './library/shops', 'GilShop')
+  fetchData(specialShopsFetching, 'Special Shop', './library/shops', 'SpecialShop')
 
   return npcList
 }
@@ -125,7 +131,7 @@ function npcOverride(linkMapItem) {
     262919:  1025763,
     1769577: 1012225,
     1769675: 1017338,
-    1769786: 1019450,
+    // 1769786: 1019450,
     1769871: 1025848,
   }
 
