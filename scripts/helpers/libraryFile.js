@@ -140,7 +140,7 @@ function processData(data) {
 
   if (data instanceof Array) {
     this.toProcess = data.length;
-    console.log(`Starting processing ${this.name}.`)
+    console.log(`Started processing ${this.name}.`)
     console.log('\n')
     compareJSON.call(this, data)
   } else if (data && typeof data === 'object') {
