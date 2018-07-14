@@ -1,17 +1,52 @@
 const fs = require('fs')
+const methodHelper = require('./methodHelper')
 
 const orchestrionUi = JSON.parse(fs.readFileSync('./library/orchestrionUi.json', 'utf8'))
 const npcMap = JSON.parse(fs.readFileSync('./library/npcMap.json', 'utf8'))
 
+let songMaps
 
 
-module.exports = function (fileDir) {
+module.exports = async function (fileDir) {
+  // First figure out which songs are coming from
+  // GilShops, SpecialShops, Quests...
+  songMaps = await songMapping()
+
+
+  // Then begin processing each song
   fs.readdir(fileDir, 'utf8', (err, files) => {
     files.forEach(file => {
       const filePath = `${fileDir}/${file}`
       buildFile(filePath)
     })
   })
+}
+
+
+/**
+ * Read songMaps from the library and create a map to
+ * the necessary content
+ *
+ * @returns {Object} - Mapped data with Song IDs as keys
+ */
+const songMapping = async () => {
+  const songs = []
+  const npcMap = JSON.parse(fs.readFileSync('./library/npcMap.json', 'utf8'))
+  const questMap = JSON.parse(fs.readFileSync('./library/questMap.json', 'utf8'))
+
+  const mapData = (data, type) => Object.entries(data).map(entry => {
+    const key = entry[0]
+    const val = entry[1]
+    val.song.forEach(item => {
+      const { song, ...noSong } = val
+      songs.push({id: key, type: type, song: item, ...noSong})
+    })
+  })
+
+  mapData(npcMap, 'purchase')
+  mapData(questMap, 'quest')
+
+  return songs
 }
 
 
@@ -26,7 +61,7 @@ function buildFile (path) {
   const response = {
     id: data.ID,
     name: songNameObject(data.Name_en, data.Name_ja),
-    method: createMethods(data.GameContentLinks, data.Name_en),
+    method: createMethods(data, data.ID),
     sorting: {
       category: songUiParams(data.ItemAction.Data0, 'category'),
       order: songUiParams(data.ItemAction.Data0, 'order'),
@@ -69,43 +104,16 @@ const songNameObject = (en, ja) => {
 const songUiParams = (key, value) => orchestrionUi[key][value]
 
 
-const createMethods = (contentLinks, trackName) => {
+const createMethods = (data, id) => {
+  const songMethods = []
+  songMaps.forEach(entry => {
+    if (entry.song !== id)
+      return
 
-  if (contentLinks.length <= 0)
-    return
+    songMethods.push(entry)
+  })
 
-  const keys = Object.keys(contentLinks)
-
-  // Fetch NPC Data to help create Method data
-  const fetchNpcData = shopID => {
-    const npc = npcMap[shopID].npc
-
-    const npcResidentData = JSON.parse(fs.readFileSync(`./library/npcs/${npc}.json`, 'utf8'))
-    const npcName = {
-      en: npcResidentData.Name_en,
-      de: npcResidentData.Name_de === npcResidentData.Name_en ? true : npcResidentData.Name_de,
-      fr: npcResidentData.Name_fr === npcResidentData.Name_en ? true : npcResidentData.Name_fr,
-      ja: npcResidentData.Name_ja === npcResidentData.Name_en ? true : npcResidentData.Name_ja
-    }
-
-    return npcName
-  }
-
-  keys.forEach(key => {
-    if (key === 'GilShopItem') {
-      contentLinks[key].Item.forEach(item => {
-        const shopID = item.toString().split('.')[0]
-        const shopItem = item.toString().split('.')[1]
-        const npcData = fetchNpcData(shopID)
-        const shopData = JSON.parse(fs.readFileSync(`./library/shops/${shopID}.json`, 'utf8'))
-
-        console.log(shopID, shopItem, trackName)
-        console.log(shopData.Items[shopItem])
-      })
-
-
-    }
-
-    console.log(key, contentLinks[key])
+  const res = songMethods.map(method => {
+    return methodHelper[method.type](data, method)
   })
 }
