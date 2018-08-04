@@ -14,14 +14,14 @@
   },
   "dependencies": {
     "file-system": "^2.2.2",
+    "log-update": "^2.3.0",
     "node-fetch": "^2.0.0",
+    "ora": "^3.0.0",
     "papaparse": "^4.3.7",
     "request": "^2.83.0"
   },
   "scripts": {
-    "start": "node index",
-    "start:patches": "node update patches",
-    "start:music": "node update music",
-    "start:musiclist": "node update musicList"
+    "start": "node _scripts/index",
+    "start-old": "node index"
   }
 }
