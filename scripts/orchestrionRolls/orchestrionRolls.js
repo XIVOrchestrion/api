@@ -1,10 +1,9 @@
 const fs = require('fs')
+const buildMaps = require('./manualMaps')
 const methodHelper = require('./methodHelper')
 
-const orchestrionUi = JSON.parse(fs.readFileSync('./library/orchestrionUi.json', 'utf8'))
-const npcMap = JSON.parse(fs.readFileSync('./library/npcMap.json', 'utf8'))
-
 let songMaps
+let manualMaps
 
 
 module.exports = async function (fileDir) {
@@ -39,12 +38,19 @@ const songMapping = async () => {
     const val = entry[1]
     val.song.forEach(item => {
       const { song, ...noSong } = val
+      type = type || entry.type
       songs.push({id: key, type: type, song: item, ...noSong})
     })
   })
 
+  manualMaps = await buildMaps()
   mapData(npcMap, 'purchase')
   mapData(questMap, 'quest')
+  mapData(manualMaps)
+
+
+  // console.log(manualMaps)
+  // console.log(songs)
 
   return songs
 }
@@ -57,19 +63,24 @@ const songMapping = async () => {
  */
 function buildFile (path) {
   const data = JSON.parse(fs.readFileSync(path, 'utf8'))
+  const orchestrionUi = JSON.parse(fs.readFileSync('./library/orchestrionUi.json', 'utf8'))
+  const uiID = data.ItemAction.Data0
 
   const response = {
-    id: data.ID,
-    name: songNameObject(data.Name_en, data.Name_ja),
+    id: orchestrionUi[uiID].id,
+    itemId: data.ID,
+    name: songNameObject(orchestrionUi[uiID].name.en, orchestrionUi[uiID].name.jp),
     method: createMethods(data, data.ID),
     sorting: {
-      category: songUiParams(data.ItemAction.Data0, 'category'),
-      order: songUiParams(data.ItemAction.Data0, 'order'),
+      category: songUiParams(orchestrionUi, data.ItemAction.Data0, 'category'),
+      order: songUiParams(orchestrionUi, data.ItemAction.Data0, 'order'),
       patch: data.GamePatch.ID,
     }
   }
 
-  // console.log( response )
+  if (response.method.length < 1)
+    console.log(response)
+
   return response
 }
 
@@ -82,8 +93,6 @@ function buildFile (path) {
  * @returns {Object} - Object containing all language variants
  */
 const songNameObject = (en, ja) => {
-  en = en.replace(' Orchestrion Roll', '')
-  ja = ja.replace('オーケストリオン譜:', '')
 
   return {
     en: en,
@@ -101,7 +110,7 @@ const songNameObject = (en, ja) => {
  * @param {string} value - Value to return from Object
  * @returns {Number} - Data value matching criteria
  */
-const songUiParams = (key, value) => orchestrionUi[key][value]
+const songUiParams = (source, key, value) => source[key][value]
 
 
 const createMethods = (data, id) => {
@@ -116,4 +125,8 @@ const createMethods = (data, id) => {
   const res = songMethods.map(method => {
     return methodHelper[method.type](data, method)
   })
+
+  // console.log(res)
+
+  return res
 }

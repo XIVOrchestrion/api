@@ -38,7 +38,7 @@ module.exports = class Library {
     this.reject = reject
 
     let apiColumns = this.file.columns ? `&columns=${this.file.columns.join(',')}` : ''
-    let apiPath = `https://api.xivdb-staging.com/${this.file.url}`
+    let apiPath = `https://xivapi.com/${this.file.url}`
 
     if (!this.list)
       return callApi.call(this, apiPath, apiColumns, processData.bind(this))

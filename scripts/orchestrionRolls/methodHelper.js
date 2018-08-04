@@ -84,6 +84,75 @@ const helper = {
     }
 
     return res
+  },
+  trial: (data, methodData) => {
+
+  },
+  fadedTrial: (data, methodData) => {
+    const instance = JSON.parse(fs.readFileSync(`./library/instance.json`, 'utf8'))
+    let instanceKey
+    Object.entries(instance).filter(entry => {
+      const key = entry[0]
+      const val = entry[1]
+
+      if (val.id === Math.floor(methodData.id)) {
+        instanceKey = key
+      }
+
+      return
+    })
+
+
+    const res = {
+      type: 'fadedTrial',
+      instance: {
+        name: populateName(
+          instance[instanceKey].name.en,
+          instance[instanceKey].name.de,
+          instance[instanceKey].name.fr,
+          instance[instanceKey].name.jp,
+        )
+      }
+    }
+
+    // console.log(res)
+
+    return res
+  },
+  raid: (data, methodData) => {
+
+  },
+  fadedRaid: (data, methodData) => {
+
+    const instance = JSON.parse(fs.readFileSync(`./library/instance.json`, 'utf8'))
+    let instanceKey
+    Object.entries(instance).filter(entry => {
+      const key = entry[0]
+      const val = entry[1]
+
+      if (val.id === Math.floor(methodData.id)) {
+        instanceKey = key
+      }
+
+      return
+    })
+
+
+    const res = {
+      type: 'fadedRaid',
+      instance: {
+        name: populateName(
+          instance[instanceKey].name.en,
+          instance[instanceKey].name.de,
+          instance[instanceKey].name.fr,
+          instance[instanceKey].name.jp,
+        )
+      }
+    }
+
+    // console.log(res)
+
+    return res
   }
 }
 
