@@ -21,18 +21,19 @@ global.appRoot = path.resolve(__dirname)
 
 const api = async function(args) {
 
+  const fetchCurrencyData = () => new Promise((resolve, reject) => fetchCurrency.fetch(resolve))
   const fetchPatchData = () => new Promise((resolve, reject) => fetchPatchList.fetch(resolve))
   const fetchInstanceData = () => new Promise((resolve, reject) => fetchInstanceContent.fetch(resolve))
   const fetchOrchestrionData = () => new Promise((resolve, reject) => fetchOrchestrion.fetch(resolve))
 
   console.clear()
   await fetchPatchData()
+    .then(() => fetchCurrencyData())
     .then(() => fetchInstanceData())
     .then(() => fetchOrchestrionData())
     .then(res => processOrchestrion(res))
   //   return fs.readFileSync('../library/fetchOrchestrion.json')
   // })
-  //   .then(res => console.log(JSON.parse(res) ))
 }
 
 api(process.argv.slice(2))
