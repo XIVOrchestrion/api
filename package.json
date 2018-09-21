@@ -21,7 +21,6 @@
     "request": "^2.88.0"
   },
   "scripts": {
-    "start": "node _scripts/index",
-    "start-old": "node index"
+    "start": "node index"
   }
 }
