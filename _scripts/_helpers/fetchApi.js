@@ -24,13 +24,17 @@ module.exports = class FetchApi {
     this.fileList     = config.fileList
     this.formatData   = config.formatData
 
+    this.callback     = callback
+    this.useCallback  = config.useCallback
+    this.recursive    = config.recursive
+
     this.created      = 0
     this.updated      = 0
     this.errors       = 0
     this.toProcess    = 0
     this.processed    = 0
 
-    this.spinner = new Ora({
+    this.spinner      = config.spinner || new Ora({
       text: `Fetching ${this.name} data from xivapi`,
       // spinner: 'shark'
     })
@@ -45,7 +49,7 @@ module.exports = class FetchApi {
     this.resolve = resolve
     this.reject = reject
 
-    this.spinner.start()
+    !this.spinner.isSpinning ? this.spinner.start() : this.spinner.text = `Fetching ${this.name} data from xivapi`
 
     const apiUrl = `https://xivapi.com/${this.apiPath}`
     const apiColumns = this.apiColumns ? `&columns=${this.apiColumns.join(',')}` : ''
@@ -90,19 +94,19 @@ async function callApi (apiPath, result = []) {
     })
 
   // If not a paginated results object, return the data
-  if (!data.results) {
+  if (!data.Results) {
     return data
   }
 
   // Combine previous pages' data with newest pull
-  this.spinner.text = `Fetching ${this.name} data (${data.pagination.page}/${data.pagination.page_total}) from xivapi`
-  result = [...result, ...data.results]
+  this.spinner.text = `Fetching ${this.name} data (${data.Pagination.Page}/${data.Pagination.PageTotal}) from xivapi`
+  result = [...result, ...data.Results]
 
   // Handle next page if
-  if (data.pagination.page_next) {
+  if (data.Pagination.PageNext !== 1) {
     apiPath = apiPath.includes('&page=')
-            ? apiPath.replace(/(&page=[0-9]*)/g, `&page=${data.pagination.page_next}`)
-            : `${apiPath}&page=${data.pagination.page_next}`
+            ? apiPath.replace(/(&page=[0-9]*)/g, `&page=${data.Pagination.PageNext}`)
+            : `${apiPath}&page=${data.Pagination.PageNext}`
 
     return callApi.call(this, apiPath, result)
   }
@@ -125,6 +129,9 @@ function process (data) {
   // Remove empty objects from the start of arrays
   if (data instanceof Array)
     data = data.filter(d => d.ID !== 0)
+
+  if (this.useCallback)
+    return handleCallback.call(this, data)
 
 
   const checkFileData = (d, logMsg) => {
@@ -156,10 +163,11 @@ function process (data) {
   if (this.fileList) {
     this.toProcess = 1
     this.spinner.text = `Preparing to create ${this.toProcess} file`
-    this.spinner.start()
 
     return checkFileData(data, `${this.name} @ ${this.filePath}`,)
   }
+
+  return checkFileData(data, `${this.name} @ ${this.filePath}`,)
 }
 
 
@@ -185,8 +193,8 @@ function writeFile (d, logMsg, isNew) {
 
   progress.call(this)
 
-  if (this.fileList)
-    finalise.call(this, d)
+  // if (this.fileList)
+  finalise.call(this, d)
 }
 
 
@@ -221,8 +229,25 @@ function progress () {
  *
  */
 function finalise (d) {
+  if (this.recursive)
+    return this.callback(this.spinner, this.created, this.updated)
+
+  if (this.callback)
+    return this.callback(d, this.spinner, this.args, this.resolve)
+
   if (this.resolve)
     return this.resolve(d)
 
   return
+}
+
+
+
+function handleCallback (d) {
+  if (!this.useCallback)
+    return this.spinner.fail(`Processing for ${this.name} halted. handleCallback() should not have been called.`)
+
+  d = formatData.call(this, d)
+
+  return this.callback(d, this.spinner, this.args, this.resolve)
 }
