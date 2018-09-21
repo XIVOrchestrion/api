@@ -18,7 +18,7 @@
     "node-fetch": "^2.0.0",
     "ora": "^3.0.0",
     "papaparse": "^4.3.7",
-    "request": "^2.83.0"
+    "request": "^2.88.0"
   },
   "scripts": {
     "start": "node _scripts/index",
