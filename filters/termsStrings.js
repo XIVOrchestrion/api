@@ -213,6 +213,12 @@ const locales = {
       'Les Vestiges De La Cité D\'Amdapor (brutal)',
       '神聖遺跡 古アムダプール市街 (Hard)'
     ],
+    snowcloak: [
+      'Snowcloak',
+      'Das Schneekleid',
+      'Manteneige',
+      '氷結潜窟 スノークローク大氷壁'
+    ],
     theLabyrinthOfTheAncients: [
       'The Labyrinth Of The Ancients',
       'Kristallturm - Das Labyrinth Der Alten',
@@ -231,6 +237,25 @@ const locales = {
       'La Tour De Cristal - Monde Des Ténèbres',
       'クリスタルタワー：闇の世界'
     ],
+    theGreatGubalLibrary: [
+      'The Great Gubal Library',
+      'Große Gubal-Bibliothek',
+      'La Grande Bibliothèque De Gubal',
+      '禁書回収 グブラ幻想図書館'
+    ],
+    theFractalContinuum: [
+      'The Fractal Continuum',
+      'Die Fraktal-Kontinuum',
+      'Le Continuum Fractal',
+      '博物戦艦 フラクタル・コンティニアム'
+    ],
+    sohrKhai: [
+      'Sohr Khai',
+      true,
+      true,
+      '天竜宮殿 ソール・カイ'
+    ],
+
     domaCastle: [
       'Doma Castle',
       'Burg Doma',
@@ -275,6 +300,19 @@ const locales = {
       'Le Nombril (extrême)',
       '極タイタン討滅戦'
     ],
+    // Heavensward
+    theLimitlessBlueExtreme: [
+      'The Limitless Blue (Extreme)',
+      'Zenit Der Götter - Bismarck',
+      'L\'Immensité Bleue (extrême)',
+      '極ビスマルク討滅戦'
+    ],
+    thokAstThokExtreme: [
+      'Thok Ast Thok (Extreme)',
+      'Zenit Der Götter - Ravana',
+      'Thok Ast Thok (extrême)',
+      '極ラーヴァナ討滅戦'
+    ],
     thordansReign: [
       'The Minstrel\'s Ballad: Thordan\'s Reign',
       'Heldenlied Von Thordans Fall',
@@ -299,13 +337,14 @@ const locales = {
       'Unité De Contention Z1P9 (extrême)',
       '極鬼神ズルワーン討滅戦'
     ],
+    // Stormblood
     shinryusDomain: [
       'The Minstrel\'s Ballad: Shinryu\'s Domain',
       'Heldenlied Von Shinryu',
       'Le Domaine De Shinryu',
       '極神龍討滅戦'
     ],
-    theJadeStoa: [
+    theJadeStoaExtreme: [
       'The Jade Stoa (Extreme)',
       'Seelensturm - Byakko',
       'La Clairière De Jade (extrême)',
@@ -317,11 +356,23 @@ const locales = {
       'Castrum Fluminis (extrême)',
       '極ツクヨミ討滅戦'
     ],
-    theBindingCoilT5: [],
-    theSecondCoilT4: [],
-    theSecondCoilT4Savage: [],
-    theFinalCoilT3: [],
-    theFinalCoilT4: [],
+  },
+  raid: {
+    theBindingCoilT5: [
+
+    ],
+    theSecondCoilT4: [
+
+    ],
+    theSecondCoilT4Savage: [
+
+    ],
+    theFinalCoilT3: [
+
+    ],
+    theFinalCoilT4: [
+
+    ],
   }
 }
 

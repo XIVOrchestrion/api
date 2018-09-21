@@ -3,22 +3,24 @@
   "version": "1.0.0",
   "description": "Mock API for FadedCopy",
   "private": true,
-  "main": "update.js",
   "keywords": [
     "javascript"
   ],
   "author": "Liam Morgan",
   "license": "MIT",
+  "main": "index.js",
+  "directories": {
+    "docs": "./docs"
+  },
   "dependencies": {
     "file-system": "^2.2.2",
+    "log-update": "^2.3.0",
     "node-fetch": "^2.0.0",
+    "ora": "^3.0.0",
     "papaparse": "^4.3.7",
-    "request": "^2.83.0"
+    "request": "^2.88.0"
   },
   "scripts": {
-    "start": "node update",
-    "start:patches": "node update patches",
-    "start:music": "node update music",
-    "start:musiclist": "node update musicList"
+    "start": "node index"
   }
 }

@@ -12,9 +12,13 @@ const {
 } = termsStrings
 
 
-/* vendors
- * Return an array containing relevant data related to necessary vendors
- * - foo: [vendorNames.bar, vendorMenus.bar, locales.bar, posX, posY]
+/**
+ *
+ * @example
+ * // Vendor 'foo'
+ * foo: [vendorNames.bar, vendorMenus.bar, locales.bar, posX, posY]
+ * -
+ * @returns {array} - relevant data related to necessary vendors
  */
 const vendors = {
   amberTrader:                    [vendorNames.amberTrader, vendorMenus.amberExchangeOther, locales.foundation, 10, 10.3],
@@ -198,6 +202,17 @@ const helper = {
       false
     )
   },
+  fadedRaid: (name, level) => {
+    return o(
+      'fadedRaid',
+      [
+        name,
+        level
+      ],
+      true,
+      false,
+    )
+  },
   fadedTreasureMap: (type) => {
     return o(
       'fadedTreasureMap',
@@ -236,8 +251,14 @@ module.exports = (song, achievement) => {
       helper.fadedPurchase(500, currency.tomePoet, vendors.auriana),
       helper.crafted(50, false, false)
     ],
-    14230: helper.fadedHunt('A', locales.theDravanianForelands),
-    14231: helper.fadedHunt('A', locales.theSeaOfClouds),
+    14230: [
+      helper.fadedHunt('A', locales.theDravanianForelands),
+      helper.crafted(60, false, false)
+    ],
+    14231: [
+      helper.fadedHunt('A', locales.theSeaOfClouds),
+      helper.crafted(60, false, false)
+    ],
     14232: helper.achievement(1433),
     14233: helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant),
     14234: helper.fadedTreasureMap(['all', true, true, true]),
@@ -346,17 +367,53 @@ module.exports = (song, achievement) => {
       helper.fadedDuty(locales.duty.theWorldOfDarkness, 50),
       helper.crafted(60, 1, false)
     ],
-
+    14263: [
+      helper.fadedRaid(locales.raid.theBindingCoilT5, 50),
+      helper.crafted(50, 4, false)
+    ],
+    14264: [
+      helper.fadedRaid(locales.raid.theSecondCoilT4, 50),
+      helper.crafted(50, 4, false)
+    ],
+    14265: [
+      helper.fadedRaid(locales.raid.theFinalCoilT3, 50),
+      helper.crafted(50, 4, false)
+    ],
     14266: helper.purchase(375, currency.tomePoet, vendors.hismena),
+    14267: [
+      helper.fadedRaid(locales.raid.theBindingCoilT5, 50),
+      helper.fadedRaid(locales.raid.theSecondCoilT4, 50),
+      helper.fadedRaid(locales.raid.theFinalCoilT4, 50),
+      helper.crafted(60, 2, false)
+    ],
 
     15799: helper.purchase(5000, currency.gil, vendors.roarich),
     15800: helper.purchase(5000, currency.gil, vendors.bangoZango),
     15801: helper.purchase(5000, currency.gil, vendors.maisenta),
     15802: helper.purchase(5000, currency.gil, vendors.frine),
-
+    15803: helper.purchase(5000, currency.gil, vendors.junkmongerMatoya),
+    15804: helper.purchase(5000, currency.gil, vendors.merchantTailfeather),
+    15805: [
+      helper.fadedHunt('A', locales.coerthasWesternHighlands),
+      helper.crafted(60, false, false)
+    ],
+    15806: [
+      helper.fadedHunt('A', locales.theChurningMists),
+      helper.crafted(60, false, false)
+    ],
+    15807: [
+      helper.fadedHunt('A', locales.theDravanianHinterlands),
+      helper.crafted(60, false, false)
+    ],
     15808: helper.purchase(5000, currency.gil, vendors.roarich),
     15809: helper.purchase(5000, currency.gil, vendors.bangoZango),
     15810: helper.purchase(5000, currency.gil, vendors.maisenta),
+
+    15813: helper.duty(locales.duty.snowcloak, 50),
+    15814: helper.purchase(375, currency.tomePoet, vendors.hismena),
+    15815: helper.duty(locales.duty.theGreatGubalLibrary, 59),
+    15816: helper.duty(locales.duty.theFractalContinuum, 60),
+    15817: helper.duty(locales.duty.sohrKhai, 60),
 
     15824: helper.purchase(20000, currency.mgp, vendors.goldSaucerAttendant),
 
@@ -370,15 +427,44 @@ module.exports = (song, achievement) => {
 
     16811: helper.purchase(20000, currency.mgp, vendors.goldSaucerAttendant),
 
+    17639: [
+      helper.fadedTrial(locales.trial.thokAstThokExtreme, 60),
+      helper.crafted(60, 1, false)
+    ],
+    17640: [
+      helper.fadedTrial(locales.trial.thokAstThokExtreme, 60),
+      helper.crafted(60, 1, false)
+    ],
+    17641: [
+      helper.fadedTrial(locales.trial.containmentBayZ1T9, 60),
+      helper.crafted(60, 3, false)
+    ],
     17642: helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant),
     17643: helper.purchase(30000, currency.mgp, vendors.goldSaucerAttendant),
 
+    17853: [
+      helper.fadedTrial(locales.trial.containmentBayZ1T9, 60),
+      helper.crafted(70, 1, false)
+    ],
+
     22485: helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant),
+    22486: [
+      helper.fadedTrial(locales.trial.theJadeStoaExtreme, 70),
+      helper.crafted(70, 3, false)
+    ],
+    22487: [
+      helper.fadedTrial(locales.trial.theJadeStoaExtreme, 70),
+      helper.crafted(70, 3, false)
+    ],
     22488: helper.purchase(50000, currency.mgp, vendors.goldSaucerAttendant),
 
     23321: helper.duty(locales.duty.theLostCityOfAmdaporHard, 50),
     23322: helper.duty(locales.duty.domaCastle, 67),
     23323: helper.duty(locales.duty.theSwallowsCompass, 70),
+    23324: [
+      helper.fadedHunt('A', locales.coerthasWesternHighlands),
+      helper.crafted(60, false, false)
+    ],
 
     23328: helper.duty(locales.duty.theRidoranaLighthouse, 70),
     23329: helper.duty(locales.duty.theRidoranaLighthouse, 70),
