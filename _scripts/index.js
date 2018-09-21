@@ -12,28 +12,96 @@ const fetchCurrency = require('./fetches/fetchCurrency')
 const fetchInstanceContent = require('./fetches/fetchInstanceContent')
 const fetchOrchestrion = require('./fetches/fetchOrchestrion')
 const fetchPatchList = require('./fetches/fetchPatchList')
+const fetchAetherCurrent = require('./fetches/fetchAetherCurrent')
+const fetchAetherLinks = require('./fetches/fetchAetherLinks')
+const fetchAetherLevels = require('./fetches/fetchAetherLevels')
+
+const territoryType = require('./_xivmaps/fetch/territoryType')
+const level = require('./_xivmaps/fetch/level')
+const buildMaps = require('./_xivmaps/process')
 
 const processOrchestrion = require('./process/processOrchestrion')
+const processAetherCurrents = require('./process/aetherCurrents')
+
+const mapAetherCurrents = require('./maps/aetherCurrents')
 
 
 global.appRoot = path.resolve(__dirname)
 
 
 const api = async function(args) {
+  let config = {}
+
+  args.length ? args.forEach(a => config[a] = true) : config = false
 
   const fetchCurrencyData = () => new Promise((resolve, reject) => fetchCurrency.fetch(resolve))
   const fetchPatchData = () => new Promise((resolve, reject) => fetchPatchList.fetch(resolve))
   const fetchInstanceData = () => new Promise((resolve, reject) => fetchInstanceContent.fetch(resolve))
   const fetchOrchestrionData = () => new Promise((resolve, reject) => fetchOrchestrion.fetch(resolve))
+  const fetchAetherCurrentData = () => new Promise((resolve, reject) => fetchAetherCurrent.fetch(resolve))
+  const fetchAetherLinksData = data => new Promise((resolve, reject) => fetchAetherLinks(data, resolve))
+  const fetchAetherLevelsData = data => new Promise((resolve, reject) => fetchAetherLevels(data, resolve))
+
+  const fetchTerritoryType = () => new Promise(resolve => territoryType.fetch(resolve))
+  const fetchLevels = () => new Promise(resolve => level(resolve))
 
   console.clear()
-  await fetchPatchData()
-    .then(() => fetchCurrencyData())
-    .then(() => fetchInstanceData())
-    .then(() => fetchOrchestrionData())
-    .then(res => processOrchestrion(res))
-  //   return fs.readFileSync('../library/fetchOrchestrion.json')
-  // })
+
+  if (config.help || config['--help']) {
+    console.log(`
+      currents: Fetch Aether Currents data from XIVAPI
+      currentsBuild: Build data object for Aether Currents
+    `)
+  }
+
+  if(config.faded) {
+    await fetchPatchData()
+      // .then(data => console.log(data))
+      // .then(() => fetchCurrencyData())
+      // .then(() => fetchInstanceData())
+      // .then(() => fetchOrchestrionData())
+      // .then(res => processOrchestrion(res))
+    //   return fs.readFileSync('../library/fetchOrchestrion.json')
+    // })
+  }
+
+  if (config.fadedBuild) {
+
+    await processOrchestrion()
+  }
+
+  /**
+   * - Check Patch Data
+   * - Fetch all Aether Current items
+   * - Use Aether Current IDs to get Levels data
+   * - Fetch required Levels data
+   * - Map Levels to the relate ID data
+   */
+  if(config.currents) {
+    await fetchPatchData()
+      .then(() => fetchAetherCurrentData())
+      .then(data => fetchAetherLinksData(data))
+      .then(data => fetchAetherLevelsData(data))
+      .then(() => mapAetherCurrents())
+      .then(() => console.log('✅  Currents Library data is now populated'))
+  }
+
+  if(config.currentsBuild) {
+    if (!fs.existsSync('./library/currents'))
+      console.error('Currents data does not exist. Please run `npm start currents` and try again.')
+
+    processAetherCurrents()
+  }
+
+
+  if (config.map) {
+    await fetchPatchData()
+      .then(() => fetchLevels())
+  }
+
+  if (config.mapBuild) {
+    buildMaps()
+  }
 }
 
 api(process.argv.slice(2))
