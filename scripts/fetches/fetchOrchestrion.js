@@ -25,9 +25,9 @@ module.exports = new fetchApi (
           name:       item.Name,
           info: {
             desc:     item.Description,
-            uiId:     item['OrchestrionUiparam.ID'],
-            uiCat:    item['OrchestrionUiparam.OrchestrionCategory.ID'],
-            uiOrder:  item['OrchestrionUiparam.Order'],
+            uiId:     item.OrchestrionUiparam.ID,
+            uiCat:    item.OrchestrionUiparam.OrchestrionCategory.ID,
+            uiOrder:  item.OrchestrionUiparam.Order,
           },
           links:      item.GameContentLinks,
         }
