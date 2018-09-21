@@ -8,22 +8,22 @@
 const fs = require('fs')
 const path = require('path')
 
-const updatePatches = require('./scripts/library/patchList')
-const updateCurrency = require('./scripts/library/currency')
-const updateInstances = require('./scripts/library/instances')
-const updateGilShops = require('./scripts/library/gilShop')
-const updateSpecialShops = require('./scripts/library/specialShop')
-const updatePlaceNames = require('./scripts/library/placeNames')
-const updateNpcResidents = require('./scripts/library/npcResidents')
-const updateOrchestrionRolls = require('./scripts/library/orchestrionRolls')
-const updateOrchestrionUi = require('./scripts/library/orchestrionUi')
-const updateCrafts = require('./scripts/library/crafts')
-const updateQuests = require('./scripts/library/quests')
+const fetchCurrency = require('./scripts/fetches/fetchCurrency')
+const fetchInstanceContent = require('./scripts/fetches/fetchInstanceContent')
+const fetchOrchestrion = require('./scripts/fetches/fetchOrchestrion')
+const fetchPatchList = require('./scripts/fetches/fetchPatchList')
+const fetchAetherCurrent = require('./scripts/fetches/fetchAetherCurrent')
+const fetchAetherLinks = require('./scripts/fetches/fetchAetherLinks')
+const fetchAetherLevels = require('./scripts/fetches/fetchAetherLevels')
 
-const buildNpcList = require('./scripts/library/npcList')
+const territoryType = require('./scripts/_xivmaps/fetch/territoryType')
+const level = require('./scripts/_xivmaps/fetch/level')
+const buildMaps = require('./scripts/_xivmaps/process')
 
-const buildOrchestrionRolls = require('./scripts/orchestrionRolls/orchestrionRolls')
+const processOrchestrion = require('./scripts/process/processOrchestrion')
+const processAetherCurrents = require('./scripts/process/aetherCurrents')
 
+const mapAetherCurrents = require('./scripts/maps/aetherCurrents')
 
 
 global.appRoot = path.resolve(__dirname)
@@ -34,38 +34,73 @@ const api = async function(args) {
 
   args.length ? args.forEach(a => config[a] = true) : config = false
 
-  // Library updating
-  if (!config || config.libra) {
+  const fetchCurrencyData = () => new Promise((resolve, reject) => fetchCurrency.fetch(resolve))
+  const fetchPatchData = () => new Promise((resolve, reject) => fetchPatchList.fetch(resolve))
+  const fetchInstanceData = () => new Promise((resolve, reject) => fetchInstanceContent.fetch(resolve))
+  const fetchOrchestrionData = () => new Promise((resolve, reject) => fetchOrchestrion.fetch(resolve))
+  const fetchAetherCurrentData = () => new Promise((resolve, reject) => fetchAetherCurrent.fetch(resolve))
+  const fetchAetherLinksData = data => new Promise((resolve, reject) => fetchAetherLinks(data, resolve))
+  const fetchAetherLevelsData = data => new Promise((resolve, reject) => fetchAetherLevels(data, resolve))
 
-    const testScriptPatches = require('./_scripts/libra/patches')
-    const testScriptOrchestrion = require('./_scripts/libra/orchestrionRolls')
-    const testScriptCurrencies = require('./_scripts/libra/currency')
-    const testScriptRecipes = require('./_scripts/libra/recipes')
-    await new Promise((resolve, reject) => testScriptPatches.fetch(resolve))
-      // .then(() => new Promise( resolve => testScriptOrchestrion.fetch(resolve)))
-      // .then(() => new Promise( resolve => testScriptRecipes(resolve)))
+  const fetchTerritoryType = () => new Promise(resolve => territoryType.fetch(resolve))
+  const fetchLevels = () => new Promise(resolve => level(resolve))
 
-    // await new Promise((resolve, reject) => updatePatches.fetch(resolve))
-    //   // .then(() => new Promise( resolve => updateGilShops.fetch(resolve) ))
-    //   // .then(() => new Promise( resolve => updateSpecialShops.fetch(resolve) ))
-    //   // .then(() => new Promise( resolve => updateOrchestrionUi.fetch(resolve) ))
-    //   // .then(() => new Promise( resolve => updateOrchestrionRolls.fetch(resolve) ))
-    //   // .then(() => new Promise( resolve => updateNpcResidents.fetch(resolve) ))
-    //   // .then(() => buildNpcList())
-    //   // .then(() => new Promise( resolve => updateQuests.fetch(resolve) ))
-    //   // .then(() => new Promise( resolve => updateInstances.fetch(resolve) ))
-    //   .then(() => new Promise( resolve => updateCrafts.fetch(resolve) ))
-    //   .catch(e => console.warn(e))
-    //
-    // // updatePlaceNames.fetch()
+  console.clear()
+
+  if (config.help || config['--help']) {
+    console.log(`
+      currents: Fetch Aether Currents data from XIVAPI
+      currentsBuild: Build data object for Aether Currents
+    `)
   }
 
-  if (!config | config.build) {
-    if (fs.existsSync('./library/orchestrion', 'utf8'))
-      buildOrchestrionRolls('./library/orchestrion')
+  if(config.faded) {
+    await fetchPatchData()
+      // .then(() => fetchCurrencyData())
+      // .then(() => fetchInstanceData())
+      .then(() => fetchOrchestrionData())
+      // .then(res => processOrchestrion(res))
+    //   return fs.readFileSync('../library/fetchOrchestrion.json')
+    // })
+  }
 
+  if (config.fadedBuild) {
+
+    await processOrchestrion()
+  }
+
+  /**
+   * - Check Patch Data
+   * - Fetch all Aether Current items
+   * - Use Aether Current IDs to get Levels data
+   * - Fetch required Levels data
+   * - Map Levels to the relate ID data
+   */
+  if(config.currents) {
+    await fetchPatchData()
+      .then(() => fetchAetherCurrentData())
+      .then(data => fetchAetherLinksData(data))
+      .then(data => fetchAetherLevelsData(data))
+      .then(() => mapAetherCurrents())
+      .then(() => console.log('✅  Currents Library data is now populated'))
+  }
+
+  if(config.currentsBuild) {
+    if (!fs.existsSync('./library/currents'))
+      console.error('Currents data does not exist. Please run `npm start currents` and try again.')
+
+    processAetherCurrents()
+  }
+
+
+  if (config.map) {
+    await fetchPatchData()
+      .then(() => fetchLevels())
+  }
+
+  if (config.mapBuild) {
+    buildMaps()
   }
 }
-
 
 api(process.argv.slice(2))
