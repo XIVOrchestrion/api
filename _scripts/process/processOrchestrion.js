@@ -2,7 +2,7 @@ const fs = require('fs')
 const { destLibra } = require ('../_consts')
 
 
-module.exports = async function (data) {
+module.exports = async function () {
   // Go through OrchestrionMap data
   // Fetch all ITEM GameContentLinks
   // Make a fetch for each file
@@ -10,7 +10,27 @@ module.exports = async function (data) {
   // Add any manual data to the map at this point
   // With the file data obtained save the file down
 
-  // const data = await JSON.parse(fs.readFileSync(`${destLibra}/orchestrionMap.json`, 'utf8'))
+  const data = await JSON.parse(fs.readFileSync(`${destLibra}/orchestrionMap.json`, 'utf8'))
+
+  const res = data.map(song => {
+    return {
+      id: song.id,
+      name: {
+        en: song.name,
+      },
+      desc: {
+        en: song.info.desc,
+      },
+      sorting: {
+        defOrder: song.info.uiId,
+        category: song.info.uiCat,
+        catOrder: song.info.uiOrder,
+      },
+    }
+  })
+
+  console.log(res)
+  fs.writeFileSync('./docs/fadedCopy.json', JSON.stringify(res), 'utf8')
 
   /**
    * Scan description content to auto-populate Instance Data
@@ -61,5 +81,5 @@ module.exports = async function (data) {
     })
   }
 
-  mapInstances()
+  // mapInstances()
 }
