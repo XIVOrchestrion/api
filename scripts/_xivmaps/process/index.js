@@ -1,6 +1,6 @@
 const fs = require('fs')
 const request = require('request')
-const { apiPath, destLibra, pathMaps } = require ('../../_consts')
+const { apiPath, destLibra, pathMaps } = require ('../../../_consts')
 const populateName = require('../../_helpers/populateName')
 
 

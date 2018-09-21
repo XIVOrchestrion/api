@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { destLibra } = require ('../_consts')
+const { destLibra } = require ('../../_consts')
 
 
 module.exports = async function () {
@@ -12,22 +12,23 @@ module.exports = async function () {
 
   const data = await JSON.parse(fs.readFileSync(`${destLibra}/orchestrionMap.json`, 'utf8'))
 
-  const res = data.map(song => {
-    return {
-      id: song.id,
-      name: {
-        en: song.name,
-      },
-      desc: {
-        en: song.info.desc,
-      },
-      sorting: {
-        defOrder: song.info.uiId,
-        category: song.info.uiCat,
-        catOrder: song.info.uiOrder,
-      },
-    }
-  })
+  const res = data.filter(song => song.name)
+    .map(song => {
+      return {
+        id: song.id,
+        name: {
+          en: song.name,
+        },
+        desc: {
+          en: song.info.desc,
+        },
+        sorting: {
+          defOrder: song.info.uiId,
+          category: song.info.uiCat,
+          catOrder: song.info.uiOrder,
+        },
+      }
+    })
 
   console.log(res)
   fs.writeFileSync('./docs/fadedCopy.json', JSON.stringify(res), 'utf8')

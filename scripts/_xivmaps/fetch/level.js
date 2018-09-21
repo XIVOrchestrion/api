@@ -1,7 +1,7 @@
 const fs = require('fs')
 const fetchApi = require('../../_helpers/fetchApi')
 const recursiveFetch = require('../../_helpers/recursiveFetch')
-const { destLibra, libraMapsLevels } = require ('../../_consts')
+const { destLibra, libraMapsLevels } = require ('../../../_consts')
 
 //
 // const levels = new fetchApi (

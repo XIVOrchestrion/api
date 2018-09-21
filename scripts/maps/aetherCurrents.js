@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { destLibra, destLibraCurrents, destLibraLevels } = require ('../_consts')
+const { destLibra, destLibraCurrents, destLibraLevels } = require ('../../_consts')
 const mapData = require('../_helpers/mapData')
 
 

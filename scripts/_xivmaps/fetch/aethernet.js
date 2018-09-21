@@ -1,6 +1,6 @@
 const fs = require('fs')
 const fetchApi = require('../../_helpers/fetchApi')
-const { destLibra } = require ('../../_consts')
+const { destLibra } = require ('../../../_consts')
 
 
 module.exports = new fetchApi (

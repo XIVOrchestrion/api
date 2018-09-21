@@ -1,4 +1,4 @@
-const { destLibraLevels } = require ('../_consts')
+const { destLibraLevels } = require ('../../_consts')
 const fetchApi = require('../_helpers/fetchApi')
 const recursiveFetch = require('../_helpers/recursiveFetch')
 
