@@ -30,7 +30,6 @@ module.exports = async function () {
       }
     })
 
-  console.log(res)
   fs.writeFileSync('./docs/fadedCopy.json', JSON.stringify(res), 'utf8')
 
   /**
